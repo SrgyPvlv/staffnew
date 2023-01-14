@@ -39,7 +39,7 @@ public class EmployeeEntityController {
 	@GetMapping("/employees")
 	public ResponseEntity<List<EmployeeEntity>> findByNameMobilePosition(@RequestParam(required=false) String filter){
 		
-		if(filter != null && !filter.isBlank()) {
+		if(!filter.isEmpty() && filter.trim().length()!=0) {
 			String filter1=filter;
 			String filter2=filter;
 			String filter3=filter;
