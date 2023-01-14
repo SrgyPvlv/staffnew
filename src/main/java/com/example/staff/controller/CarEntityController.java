@@ -21,7 +21,7 @@ import com.example.staff.service.CarEntityService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins="http://localhost:5173/")
+@CrossOrigin(origins="http://localhost:8084/")
 @RestController
 @SessionScope
 @RequiredArgsConstructor

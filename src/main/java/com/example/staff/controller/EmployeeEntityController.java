@@ -20,7 +20,7 @@ import com.example.staff.entity.EmployeeEntity;
 import com.example.staff.service.EmployeeEntityService;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins="http://localhost:5173/")
+@CrossOrigin(origins="http://localhost:8084/")
 @RestController
 @SessionScope
 @RequiredArgsConstructor
