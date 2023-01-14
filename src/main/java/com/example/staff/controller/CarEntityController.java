@@ -36,19 +36,14 @@ public class CarEntityController {
 			return ResponseEntity.ok(carEntityService.getCarEntityById(id));
 		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
-	
-	/*@GetMapping("/cars")
-	public ResponseEntity<List<CarEntity>> getAllCarEntity(){
-		try {
-			return ResponseEntity.ok(carEntityService.getAllCarEntity());
-		} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
-	}*/
-	
+		
 	@GetMapping("/cars")
 	public ResponseEntity<List<CarEntity>> findByNumberModel(@RequestParam(required=false) String filter){
 		if(filter!=null && !filter.isBlank()) {
+			String filter1=filter;
+			String filter2=filter;
 			try {
-				return ResponseEntity.ok(carEntityService.findByNumberModel(filter));
+				return ResponseEntity.ok(carEntityService.findByNumberModel(filter1,filter2));
 			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 		}else {
 			try {

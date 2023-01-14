@@ -35,19 +35,15 @@ public class EmployeeEntityController {
 			return new ResponseEntity<>(employeeEntityService.getEmployeeEntityById(id),HttpStatus.OK);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
-	
-	/*@GetMapping("/employees")
-	public ResponseEntity<List<EmployeeEntity>> getAllEmployee(){
 		
-		try {
-		return new ResponseEntity<>(employeeEntityService.getAllEmployeeEntity(),HttpStatus.OK);
-		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
-	}*/
-	
 	@GetMapping("/employees")
 	public ResponseEntity<List<EmployeeEntity>> findByNameMobilePosition(@RequestParam(required=false) String filter){
+		
 		if(filter != null && !filter.isBlank()) {
-			try {return new ResponseEntity<>(employeeEntityService.findByNameMobilePositionContaining(filter),HttpStatus.OK);
+			String filter1=filter;
+			String filter2=filter;
+			String filter3=filter;
+			try {return new ResponseEntity<>(employeeEntityService.findByNameMobilePositionContaining(filter1,filter2,filter3),HttpStatus.OK);
 			}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 		}else {
 			try {

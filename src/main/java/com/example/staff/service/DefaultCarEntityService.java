@@ -1,9 +1,6 @@
 package com.example.staff.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -58,13 +55,9 @@ public class DefaultCarEntityService implements CarEntityService {
 	}
 
 	@Override
-	public List<CarEntity> findByNumberModel(String filter) {
-		List<CarEntity> byNumber=carRepository.findByCarNumberIgnoreCaseContainingOrderByCarNumber(filter);
-		List<CarEntity> byModel=carRepository.findByCarModelCarModelIgnoreCaseContainingOrderByCarNumber(filter);
-		List<CarEntity> byNumberModel=new ArrayList<>();
+	public List<CarEntity> findByNumberModel(String filter1, String filter2) {
 		
-		Stream.of(byNumber,byModel).forEach(byNumberModel::addAll);
-		return byNumberModel;
+		return carRepository.findByCarNumberIgnoreCaseContainingOrCarModelCarModelIgnoreCaseContainingOrderByCarNumber(filter1, filter2);
 	}
 
 	

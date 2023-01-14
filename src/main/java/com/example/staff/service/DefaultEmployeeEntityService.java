@@ -1,9 +1,6 @@
 package com.example.staff.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -64,15 +61,9 @@ public class DefaultEmployeeEntityService implements EmployeeEntityService {
 	}
 
 	@Override
-	public List<EmployeeEntity> findByNameMobilePositionContaining(String filter) {
-				
-		List<EmployeeEntity> byName=employeeRepository.findByNameIgnoreCaseContainingOrderByNameAsc(filter);
-		List<EmployeeEntity> byMobile=employeeRepository.findByMobilePhoneContainingOrderByNameAsc(filter);
-		List<EmployeeEntity> byPosition=employeeRepository.findByPositionPositionIgnoreCaseContainingOrderByNameAsc(filter);
-		List<EmployeeEntity> byNameMobilePosition=new ArrayList<>();
-		Stream.of(byName,byMobile,byPosition).forEach(byNameMobilePosition::addAll);
-		
-		return byNameMobilePosition;
+	public List<EmployeeEntity> findByNameMobilePositionContaining(String filter1,String filter2,String filter3) {
+						
+		return employeeRepository.findByNameIgnoreCaseContainingOrMobilePhoneIgnoreCaseContainingOrPositionPositionIgnoreCaseContainingOrderByNameAsc(filter1, filter2, filter3);
 	}
 
 	@Override
