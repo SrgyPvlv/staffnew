@@ -20,7 +20,6 @@ import com.example.staff.service.CarEntityService;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RestController
 @SessionScope
 @RequiredArgsConstructor

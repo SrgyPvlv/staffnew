@@ -19,7 +19,6 @@ import com.example.staff.entity.EmployeeEntity;
 import com.example.staff.service.EmployeeEntityService;
 import lombok.RequiredArgsConstructor;
 
-
 @RestController
 @SessionScope
 @RequiredArgsConstructor
