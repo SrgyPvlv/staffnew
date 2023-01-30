@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -61,6 +62,13 @@ public class CarEntityController {
 	
 	@PutMapping("/cars/{id}")
 	public ResponseEntity<CarEntity> editCarEntity(@PathVariable Long id, @RequestBody CarEntity carEntity){
+		try {
+			return new ResponseEntity<>(carEntityService.editCarEntity(id, carEntity),HttpStatus.OK);
+		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
+	}
+	
+	@PatchMapping("/cars/{id}")
+	public ResponseEntity<CarEntity> updateCarEntity(@PathVariable Long id, @RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.editCarEntity(id, carEntity),HttpStatus.OK);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
