@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,6 +74,7 @@ public class EmployeeEntityController {
 	}
 	
 	@PostMapping("/employees")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<EmployeeEntity> addEmployeeEntity(@RequestBody EmployeeEntity employeeEntity){
 		try {
 			return new ResponseEntity<>(employeeEntityService.addEmployeeEntity(employeeEntity),HttpStatus.CREATED);
@@ -80,6 +82,7 @@ public class EmployeeEntityController {
 	}
 	
 	@PutMapping("/employees/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<EmployeeEntity> editEmployeeEntity(@PathVariable Long id, @RequestBody EmployeeEntity employeeEntity){
 		try {
 			return new ResponseEntity<>(employeeEntityService.editEmployeeEntity(id, employeeEntity),HttpStatus.OK);
@@ -87,6 +90,7 @@ public class EmployeeEntityController {
 	}
 	
 	@DeleteMapping("/employees/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteEmployEntityById(@PathVariable Long id){
 		try {
 			employeeEntityService.deleteEmployEntityById(id);

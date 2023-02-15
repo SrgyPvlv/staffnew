@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +41,7 @@ private final DivisionEntityService divisionEntityService;
 	}
 	
 	@PostMapping("/divisions")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<DivisionEntity> addDivisionEntity(@RequestBody DivisionEntity divisionEntity){
 		try {
 			return new ResponseEntity<>(divisionEntityService.addDivisionEntity(divisionEntity),HttpStatus.CREATED);
@@ -47,6 +49,7 @@ private final DivisionEntityService divisionEntityService;
 	}
 	
 	@PutMapping("/divisions/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<DivisionEntity> editDivisionEntity(@PathVariable Long id,@RequestBody DivisionEntity divisionEntity){
 		try {
 			return new ResponseEntity<>(divisionEntityService.editDivisionEntity(id, divisionEntity),HttpStatus.OK);
@@ -54,6 +57,7 @@ private final DivisionEntityService divisionEntityService;
 	}
 	
 	@DeleteMapping("/divisions/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteDivisionEntityById(@PathVariable Long id){
 		try {
 			divisionEntityService.deleteDivisionEntityById(id);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +55,7 @@ public class CarEntityController {
 	}
 	
 	@PostMapping("/cars")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CarEntity> addCarEntity(@RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.addCarEntity(carEntity),HttpStatus.CREATED);
@@ -61,6 +63,7 @@ public class CarEntityController {
 	}
 	
 	@PutMapping("/cars/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CarEntity> editCarEntity(@PathVariable Long id, @RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.editCarEntity(id, carEntity),HttpStatus.OK);
@@ -68,6 +71,7 @@ public class CarEntityController {
 	}
 	
 	@PatchMapping("/cars/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CarEntity> updateCarEntity(@PathVariable Long id, @RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.editCarEntity(id, carEntity),HttpStatus.OK);
@@ -75,6 +79,7 @@ public class CarEntityController {
 	}
 	
 	@DeleteMapping("/cars/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteCarEntityById(@PathVariable Long id){
 		try {
 			carEntityService.deleteCarEntityById(id);

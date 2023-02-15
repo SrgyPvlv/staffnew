@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,7 @@ public class CarModelEntityController {
 	}
 	
 	@PostMapping("/carmodels")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CarModelEntity> addCarModelEntity(@RequestBody CarModelEntity carModelEntity){
 		try {	
 			return new ResponseEntity<>(carModelEntityService.addCarModelEntity(carModelEntity),HttpStatus.CREATED);
@@ -49,6 +51,7 @@ public class CarModelEntityController {
 	}
 	
 	@PutMapping("/carmodels/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<CarModelEntity> editCarModelEntity(@PathVariable Long id, @RequestBody CarModelEntity carModelEntity){
 		try {
 			return new ResponseEntity<>(carModelEntityService.editCarModelEntity(id, carModelEntity),HttpStatus.OK);
@@ -56,6 +59,7 @@ public class CarModelEntityController {
 	}
 	
 	@DeleteMapping("/carmodels/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteCarModelEntityById(@PathVariable Long id){
 		try {
 			carModelEntityService.deleteCarModelEntityById(id);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ private final DepartmentEntityService departmentEntityService;
 	}
 	
 	@PostMapping("/departments")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<DepartmentEntity> addDepartmentEntity(@RequestBody DepartmentEntity departmentEntity){
 		try {
 			return new ResponseEntity<>(departmentEntityService.addDepartmentEntity(departmentEntity),HttpStatus.CREATED);
@@ -48,6 +50,7 @@ private final DepartmentEntityService departmentEntityService;
 	}
 	
 	@PutMapping("/departments/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<DepartmentEntity> editDepartmentEntity(@PathVariable Long id,@RequestBody DepartmentEntity departmentEntity){
 		try {
 			return new ResponseEntity<>(departmentEntityService.editDepartmentEntity(id, departmentEntity),HttpStatus.OK);
@@ -55,6 +58,7 @@ private final DepartmentEntityService departmentEntityService;
 	}
 	
 	@DeleteMapping("/departments/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteDepartmentEntityById(@PathVariable Long id){
 		try {
 			departmentEntityService.deleteDepartmentEntityById(id);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ private final FunctionGroupEntityService functionGroupEntityService;
 	}
 	
 	@PostMapping("/function-groups")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<FunctionGroupEntity> addFunctionGroupEntity(@RequestBody FunctionGroupEntity functionGroupEntity){
 		try {
 			return new ResponseEntity<>(functionGroupEntityService.addFunctionGroupEntity(functionGroupEntity),HttpStatus.CREATED);
@@ -46,6 +48,7 @@ private final FunctionGroupEntityService functionGroupEntityService;
 	}
 	
 	@PutMapping("/function-groups/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<FunctionGroupEntity> editFunctionGroupEntity(@PathVariable Long id,@RequestBody FunctionGroupEntity functionGroupEntity){
 		try {
 			return new ResponseEntity<>(functionGroupEntityService.editFunctionGroupEntity(id, functionGroupEntity),HttpStatus.OK);
@@ -53,6 +56,7 @@ private final FunctionGroupEntityService functionGroupEntityService;
 	}
 	
 	@DeleteMapping("/function-groups/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteFunctionGroupEntityById(@PathVariable Long id){
 		try {
 			functionGroupEntityService.deleteFunctionGroupEntityById(id);

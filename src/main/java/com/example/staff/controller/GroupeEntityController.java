@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +41,7 @@ private final GroupeEntityService groupeEntityService;
 	}
 	
 	@PostMapping("/groupes")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<GroupeEntity> addGroupeEntity(@RequestBody GroupeEntity groupeEntity){
 		try {
 			return new ResponseEntity<>(groupeEntityService.addGroupeEntity(groupeEntity),HttpStatus.CREATED);
@@ -47,6 +49,7 @@ private final GroupeEntityService groupeEntityService;
 	}
 	
 	@PutMapping("/groupes/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<GroupeEntity> editGroupeEntity(@PathVariable Long id,@RequestBody GroupeEntity groupeEntity){
 		try {
 			return new ResponseEntity<>(groupeEntityService.editGroupeEntity(id, groupeEntity),HttpStatus.OK);
@@ -54,6 +57,7 @@ private final GroupeEntityService groupeEntityService;
 	}
 	
 	@DeleteMapping("/groupes/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteGroupeEntityById(@PathVariable Long id){
 		try {
 			groupeEntityService.deleteGroupeEntityById(id);

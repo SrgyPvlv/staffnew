@@ -42,12 +42,12 @@ public class DefaultEmployeeEntityService implements EmployeeEntityService {
 		editedEmployeeEntity.setMobilePhone(employeeEntity.getMobilePhone());
 		editedEmployeeEntity.setBirthday(employeeEntity.getBirthday());
 		editedEmployeeEntity.setLocalPhone(employeeEntity.getLocalPhone());
-		editedEmployeeEntity.setEmployeeComment(employeeEntity.getEmployeeComment());
+		editedEmployeeEntity.setEmployeeId(employeeEntity.getEmployeeId());
 		editedEmployeeEntity.setLogin(employeeEntity.getLogin());
 		editedEmployeeEntity.setEmail(employeeEntity.getEmail());
 		editedEmployeeEntity.setEmployeeComment(employeeEntity.getEmployeeComment());
 		editedEmployeeEntity.setFactDepartment(employeeEntity.getFactDepartment());
-		editedEmployeeEntity.setFactDepartment(employeeEntity.getFactDepartment());
+		editedEmployeeEntity.setStaffDepartment(employeeEntity.getStaffDepartment());
 		editedEmployeeEntity.setCar(employeeEntity.getCar());
 		editedEmployeeEntity.setPosition(employeeEntity.getPosition());
 		
