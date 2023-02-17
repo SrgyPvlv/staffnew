@@ -84,7 +84,7 @@ public class AuthController {
 	    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
 	    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));}
 	    catch(Exception ex) {return new ResponseEntity<>(new TokenRefreshException(requestRefreshToken,
-	            "Refresh token is not in database!"),HttpStatus.OK);}
+	            "Refresh token is not in database!"),HttpStatus.NOT_FOUND);}
 	  }
 	
 	@PostMapping("/signup")
