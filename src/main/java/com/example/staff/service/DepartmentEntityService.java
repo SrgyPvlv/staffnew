@@ -8,7 +8,7 @@ public interface DepartmentEntityService {
 
 	DepartmentEntity getDepartmentEntityById(Long id);
 	List<DepartmentEntity> getAllDepartmentEntity();
-	DepartmentEntity addDepartmentEntity(DepartmentEntity positionEntity);
-	DepartmentEntity editDepartmentEntity(Long id,DepartmentEntity positionEntity);
+	DepartmentEntity addDepartmentEntity(DepartmentEntity departmentEntity);
+	DepartmentEntity editDepartmentEntity(Long id,DepartmentEntity departmentEntity);
 	void deleteDepartmentEntityById(Long id);
 }

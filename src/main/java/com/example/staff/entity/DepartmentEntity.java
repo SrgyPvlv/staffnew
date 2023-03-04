@@ -24,15 +24,15 @@ public class DepartmentEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="division_id")
 	private DivisionEntity division;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="group_id")
 	private GroupeEntity groupe;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="function_group_id")
 	private FunctionGroupEntity functionGroup;
 	

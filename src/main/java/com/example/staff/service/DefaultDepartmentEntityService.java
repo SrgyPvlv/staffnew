@@ -34,19 +34,19 @@ public class DefaultDepartmentEntityService implements DepartmentEntityService{
 	}
 
 	@Override
-	public DepartmentEntity addDepartmentEntity(DepartmentEntity positionEntity) {
+	public DepartmentEntity addDepartmentEntity(DepartmentEntity departmentEntity) {
 		
-		return departmentRepository.saveAndFlush(positionEntity);
+		return departmentRepository.saveAndFlush(departmentEntity);
 	}
 
 	@Override
-	public DepartmentEntity editDepartmentEntity(@PathVariable Long id, @RequestBody DepartmentEntity positionEntity) {
+	public DepartmentEntity editDepartmentEntity(@PathVariable Long id, @RequestBody DepartmentEntity departmentEntity) {
 		DepartmentEntity editedDepartmentEntity=departmentRepository
 				.findById(id)
 				.orElseThrow(()->new ItemNotFoundException("Department not found: id = "+ id));
-		editedDepartmentEntity.setDivision(positionEntity.getDivision());
-		editedDepartmentEntity.setGroupe(positionEntity.getGroupe());
-		editedDepartmentEntity.setFunctionGroup(positionEntity.getFunctionGroup());
+		editedDepartmentEntity.setDivision(departmentEntity.getDivision());
+		editedDepartmentEntity.setGroupe(departmentEntity.getGroupe());
+		editedDepartmentEntity.setFunctionGroup(departmentEntity.getFunctionGroup());
 		
 		return departmentRepository.saveAndFlush(editedDepartmentEntity);
 	}
