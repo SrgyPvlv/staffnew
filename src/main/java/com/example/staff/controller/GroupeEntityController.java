@@ -43,7 +43,7 @@ private final GroupeEntityService groupeEntityService;
 	}
 	
 	@PostMapping("/groupes")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<GroupeEntity> addGroupeEntity(@RequestBody GroupeEntity groupeEntity){
 		try {
 			return new ResponseEntity<>(groupeEntityService.addGroupeEntity(groupeEntity),HttpStatus.CREATED);
@@ -51,7 +51,7 @@ private final GroupeEntityService groupeEntityService;
 	}
 	
 	@PutMapping("/groupes/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<GroupeEntity> editGroupeEntity(@PathVariable Long id,@RequestBody GroupeEntity groupeEntity){
 		try {
 			return new ResponseEntity<>(groupeEntityService.editGroupeEntity(id, groupeEntity),HttpStatus.OK);
@@ -59,7 +59,7 @@ private final GroupeEntityService groupeEntityService;
 	}
 	
 	@DeleteMapping("/groupes/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteGroupeEntityById(@PathVariable Long id){
 		try {
 			groupeEntityService.deleteGroupeEntityById(id);

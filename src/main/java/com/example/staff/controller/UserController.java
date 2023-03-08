@@ -28,7 +28,7 @@ public class UserController {
 private final UserService userService;
 	
 	@GetMapping("/users/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SUPERADMIN')")
 	public ResponseEntity<Users> getUserById(@PathVariable Long id) {
 		try {
 			return ResponseEntity.ok(userService.getUsersById(id));
@@ -36,7 +36,7 @@ private final UserService userService;
 	}
 	
 	@GetMapping("/users")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SUPERADMIN')")
 	public ResponseEntity<List<Users>> getAllUsers(){
 		try {
 			return ResponseEntity.ok(userService.getAllUsers());
@@ -45,7 +45,7 @@ private final UserService userService;
 	
 		
 	@PutMapping("/users/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SUPERADMIN')")
 	public ResponseEntity<Users> editUser(@PathVariable Long id,@RequestBody Users user){
 		try {
 			return new ResponseEntity<>(userService.editUser(id, user),HttpStatus.OK);
@@ -53,7 +53,7 @@ private final UserService userService;
 	}
 	
 	@DeleteMapping("/users/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteUserById(@PathVariable Long id){
 		try {
 			userService.deleteUserById(id);

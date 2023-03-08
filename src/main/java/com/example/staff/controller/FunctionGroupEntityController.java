@@ -42,7 +42,7 @@ private final FunctionGroupEntityService functionGroupEntityService;
 	}
 	
 	@PostMapping("/function-groups")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<FunctionGroupEntity> addFunctionGroupEntity(@RequestBody FunctionGroupEntity functionGroupEntity){
 		try {
 			return new ResponseEntity<>(functionGroupEntityService.addFunctionGroupEntity(functionGroupEntity),HttpStatus.CREATED);
@@ -50,7 +50,7 @@ private final FunctionGroupEntityService functionGroupEntityService;
 	}
 	
 	@PutMapping("/function-groups/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<FunctionGroupEntity> editFunctionGroupEntity(@PathVariable Long id,@RequestBody FunctionGroupEntity functionGroupEntity){
 		try {
 			return new ResponseEntity<>(functionGroupEntityService.editFunctionGroupEntity(id, functionGroupEntity),HttpStatus.OK);
@@ -58,7 +58,7 @@ private final FunctionGroupEntityService functionGroupEntityService;
 	}
 	
 	@DeleteMapping("/function-groups/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteFunctionGroupEntityById(@PathVariable Long id){
 		try {
 			functionGroupEntityService.deleteFunctionGroupEntityById(id);

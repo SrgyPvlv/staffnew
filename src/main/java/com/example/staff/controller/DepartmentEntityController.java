@@ -42,7 +42,7 @@ private final DepartmentEntityService departmentEntityService;
 	}
 	
 	@PostMapping("/departments")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<DepartmentEntity> addDepartmentEntity(@RequestBody DepartmentEntity departmentEntity){
 		try {
 			return new ResponseEntity<>(departmentEntityService.addDepartmentEntity(departmentEntity),HttpStatus.CREATED);
@@ -50,7 +50,7 @@ private final DepartmentEntityService departmentEntityService;
 	}
 	
 	@PutMapping("/departments/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<DepartmentEntity> editDepartmentEntity(@PathVariable Long id,@RequestBody DepartmentEntity departmentEntity){
 		try {
 			return new ResponseEntity<>(departmentEntityService.editDepartmentEntity(id, departmentEntity),HttpStatus.OK);
@@ -58,7 +58,7 @@ private final DepartmentEntityService departmentEntityService;
 	}
 	
 	@DeleteMapping("/departments/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteDepartmentEntityById(@PathVariable Long id){
 		try {
 			departmentEntityService.deleteDepartmentEntityById(id);

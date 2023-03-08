@@ -43,7 +43,7 @@ public class PositionEntityController {
 	}
 	
 	@PostMapping("/positions")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<PositionEntity> addPositionEntity(@RequestBody PositionEntity positionEntity){
 		try {
 			return new ResponseEntity<>(positionEntityService.addPositionEntity(positionEntity),HttpStatus.CREATED);
@@ -51,7 +51,7 @@ public class PositionEntityController {
 	}
 	
 	@PutMapping("/positions/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<PositionEntity> editPositionEntity(@PathVariable Long id,@RequestBody PositionEntity positionEntity){
 		try {
 			return new ResponseEntity<>(positionEntityService.editPositionEntity(id, positionEntity),HttpStatus.OK);
@@ -59,7 +59,7 @@ public class PositionEntityController {
 	}
 	
 	@DeleteMapping("/positions/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deletePositionEntityById(@PathVariable Long id){
 		try {
 			positionEntityService.deletePositionEntityById(id);

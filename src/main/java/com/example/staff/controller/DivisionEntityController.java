@@ -43,7 +43,7 @@ private final DivisionEntityService divisionEntityService;
 	}
 	
 	@PostMapping("/divisions")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<DivisionEntity> addDivisionEntity(@RequestBody DivisionEntity divisionEntity){
 		try {
 			return new ResponseEntity<>(divisionEntityService.addDivisionEntity(divisionEntity),HttpStatus.CREATED);
@@ -51,7 +51,7 @@ private final DivisionEntityService divisionEntityService;
 	}
 	
 	@PutMapping("/divisions/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<DivisionEntity> editDivisionEntity(@PathVariable Long id,@RequestBody DivisionEntity divisionEntity){
 		try {
 			return new ResponseEntity<>(divisionEntityService.editDivisionEntity(id, divisionEntity),HttpStatus.OK);
@@ -59,7 +59,7 @@ private final DivisionEntityService divisionEntityService;
 	}
 	
 	@DeleteMapping("/divisions/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteDivisionEntityById(@PathVariable Long id){
 		try {
 			divisionEntityService.deleteDivisionEntityById(id);

@@ -55,7 +55,7 @@ public class CarEntityController {
 	}
 	
 	@PostMapping("/cars")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarEntity> addCarEntity(@RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.addCarEntity(carEntity),HttpStatus.CREATED);
@@ -63,7 +63,7 @@ public class CarEntityController {
 	}
 	
 	@PutMapping("/cars/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarEntity> editCarEntity(@PathVariable Long id, @RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.editCarEntity(id, carEntity),HttpStatus.OK);
@@ -71,7 +71,7 @@ public class CarEntityController {
 	}
 	
 	@PatchMapping("/cars/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarEntity> updateCarEntity(@PathVariable Long id, @RequestBody CarEntity carEntity){
 		try {
 			return new ResponseEntity<>(carEntityService.editCarEntity(id, carEntity),HttpStatus.OK);
@@ -79,7 +79,7 @@ public class CarEntityController {
 	}
 	
 	@DeleteMapping("/cars/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteCarEntityById(@PathVariable Long id){
 		try {
 			carEntityService.deleteCarEntityById(id);

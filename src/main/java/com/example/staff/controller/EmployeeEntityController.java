@@ -74,7 +74,7 @@ public class EmployeeEntityController {
 	}
 	
 	@PostMapping("/employees")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<EmployeeEntity> addEmployeeEntity(@RequestBody EmployeeEntity employeeEntity){
 		try {
 			return new ResponseEntity<>(employeeEntityService.addEmployeeEntity(employeeEntity),HttpStatus.CREATED);
@@ -82,7 +82,7 @@ public class EmployeeEntityController {
 	}
 	
 	@PutMapping("/employees/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<EmployeeEntity> editEmployeeEntity(@PathVariable Long id, @RequestBody EmployeeEntity employeeEntity){
 		try {
 			return new ResponseEntity<>(employeeEntityService.editEmployeeEntity(id, employeeEntity),HttpStatus.OK);
@@ -90,7 +90,7 @@ public class EmployeeEntityController {
 	}
 	
 	@DeleteMapping("/employees/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteEmployEntityById(@PathVariable Long id){
 		try {
 			employeeEntityService.deleteEmployEntityById(id);

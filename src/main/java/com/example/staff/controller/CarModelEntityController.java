@@ -43,7 +43,7 @@ public class CarModelEntityController {
 	}
 	
 	@PostMapping("/carmodels")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarModelEntity> addCarModelEntity(@RequestBody CarModelEntity carModelEntity){
 		try {	
 			return new ResponseEntity<>(carModelEntityService.addCarModelEntity(carModelEntity),HttpStatus.CREATED);
@@ -51,7 +51,7 @@ public class CarModelEntityController {
 	}
 	
 	@PutMapping("/carmodels/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarModelEntity> editCarModelEntity(@PathVariable Long id, @RequestBody CarModelEntity carModelEntity){
 		try {
 			return new ResponseEntity<>(carModelEntityService.editCarModelEntity(id, carModelEntity),HttpStatus.OK);
@@ -59,7 +59,7 @@ public class CarModelEntityController {
 	}
 	
 	@DeleteMapping("/carmodels/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteCarModelEntityById(@PathVariable Long id){
 		try {
 			carModelEntityService.deleteCarModelEntityById(id);
