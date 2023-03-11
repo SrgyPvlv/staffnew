@@ -43,7 +43,7 @@ public class DefaultUserService implements UserService{
 		String userDetailsPassword=userDetails.getPassword();
 		if (user.getPassword().equals(userDetailsPassword)) {
 			editedUser.setUsername(user.getUsername());
-			editedUser.setPassword(user.getPassword());
+			//editedUser.setPassword(user.getPassword());
 			editedUser.setRole(user.getRole());
 		} else {
 		editedUser.setUsername(user.getUsername());

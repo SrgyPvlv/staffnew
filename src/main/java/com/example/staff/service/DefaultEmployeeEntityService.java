@@ -77,5 +77,4 @@ public class DefaultEmployeeEntityService implements EmployeeEntityService {
 		
 		return employeeRepository.findByStaffDepartmentDivisionDivisionOrStaffDepartmentGroupeGroupeOrStaffDepartmentFunctionGroupFunctionGroupOrderByNameAsc(filter1,filter2,filter3);
 	}
-
 }
