@@ -88,7 +88,7 @@ public class AuthController {
 	  }
 	
 	@PostMapping("/signup")
-	//@PreAuthorize("hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('SUPERADMIN')")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity
@@ -112,7 +112,7 @@ public class AuthController {
 	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	    String userDetailsName=userDetails.getUsername();
 		Long userDetailsId=userRepository.findByUsername(userDetailsName).orElseThrow(()-> new UsernameNotFoundException("User Not Found with username: " + userDetailsName)).getId();
-	    refreshTokenService.deleteByUserId(userDetailsId);
+		refreshTokenService.deleteByUserId(userDetailsId);
 	    return ResponseEntity.ok(new MessageResponse("Log out successful!"));
 	  }
 }

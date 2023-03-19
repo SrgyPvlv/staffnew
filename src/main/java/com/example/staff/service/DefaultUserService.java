@@ -2,14 +2,13 @@ package com.example.staff.service;
 
 import java.util.List;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.Users;
 import com.example.staff.exception.ItemNotFoundException;
 import com.example.staff.repository.UserRepository;
+import com.example.staff.security.RefreshTokenService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +18,7 @@ public class DefaultUserService implements UserService{
 
 	private final UserRepository userRepository;
 	private final PasswordEncoder encoder;
+	private final RefreshTokenService refreshTokenService;
 	
 	@Override
 	public Users getUsersById(Long id) {
@@ -39,11 +39,9 @@ public class DefaultUserService implements UserService{
 		Users editedUser=userRepository
 				.findById(id)
 				.orElseThrow(()-> new ItemNotFoundException("User not found: id = "+id));
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String userDetailsPassword=userDetails.getPassword();
-		if (user.getPassword().equals(userDetailsPassword)) {
+		
+		if (editedUser.getPassword().equals(user.getPassword())) {
 			editedUser.setUsername(user.getUsername());
-			//editedUser.setPassword(user.getPassword());
 			editedUser.setRole(user.getRole());
 		} else {
 		editedUser.setUsername(user.getUsername());
@@ -55,7 +53,9 @@ public class DefaultUserService implements UserService{
 
 	@Override
 	public void deleteUserById(Long id) {
-		userRepository.deleteById(id);
+		try {
+		refreshTokenService.deleteByUserId(id);
+		userRepository.deleteById(id);}catch(Exception ex) {System.out.println("RefreshToken not found");};
 		
 	}
 
