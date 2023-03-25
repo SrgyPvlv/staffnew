@@ -84,7 +84,7 @@ public class AuthController {
 	    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
 	    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));}
 	    catch(Exception ex) {return new ResponseEntity<>(new TokenRefreshException(requestRefreshToken,
-	            "Refresh token is not in database!"),HttpStatus.NOT_FOUND);}
+	            "Refresh token is not in database!"),HttpStatus.GONE);}
 	  }
 	
 	@PostMapping("/signup")
@@ -109,10 +109,12 @@ public class AuthController {
 	
 	@PostMapping("/signout")
 	  public ResponseEntity<?> logoutUser() {
+		try {
 	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	    String userDetailsName=userDetails.getUsername();
 		Long userDetailsId=userRepository.findByUsername(userDetailsName).orElseThrow(()-> new UsernameNotFoundException("User Not Found with username: " + userDetailsName)).getId();
+		
 		refreshTokenService.deleteByUserId(userDetailsId);
-	    return ResponseEntity.ok(new MessageResponse("Log out successful!"));
+	    return ResponseEntity.ok(new MessageResponse("Log out successful!"));} catch (Exception ex) {return ResponseEntity.badRequest().body(new MessageResponse("RefreshToken has been deleted allready!"));}
 	  }
 }
