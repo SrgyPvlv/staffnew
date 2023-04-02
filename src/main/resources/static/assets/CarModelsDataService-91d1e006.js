@@ -1,0 +1,1 @@
+import{k as r}from"./index-2226a9a9.js";class a{get(e){return r.get(`/carmodels/${e}`)}getAll(){return r.get("/carmodels")}create(e){return r.post("/carmodels",e)}update(e,t){return r.put(`/carmodels/${e}`,t)}delete(e){return r.delete(`/carmodels/${e}`)}}const o=new a;export{o as C};
