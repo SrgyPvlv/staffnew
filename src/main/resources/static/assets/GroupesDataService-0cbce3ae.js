@@ -1,1 +1,0 @@
-import{k as r}from"./index-2226a9a9.js";class s{get(e){return r.get(`/groupes/${e}`)}getAll(){return r.get("/groupes")}create(e){return r.post("/groupes",e)}update(e,t){return r.put(`/groupes/${e}`,t)}delete(e){return r.delete(`/groupes/${e}`)}}const p=new s;export{p as G};

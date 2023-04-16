@@ -1,1 +1,0 @@
-import{k as e}from"./index-2226a9a9.js";class r{get(t){return e.get(`/function-groups/${t}`)}getAll(){return e.get("/function-groups")}create(t){return e.post("/function-groups",t)}update(t,n){return e.put(`/function-groups/${t}`,n)}delete(t){return e.delete(`/function-groups/${t}`)}}const s=new r;export{s as F};

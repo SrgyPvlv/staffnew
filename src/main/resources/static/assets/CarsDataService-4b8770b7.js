@@ -1,1 +1,0 @@
-import{k as r}from"./index-2226a9a9.js";class a{get(e){return r.get(`/cars/${e}`)}getAll(){return r.get("/cars")}create(e){return r.post("/cars",e)}edit(e,t){return r.put(`/cars/${e}`,t)}update(e,t){return r.patch(`/cars/${e}`,t)}delete(e){return r.delete(`/cars/${e}`)}findByNumberModel(e){return r.get(`/cars?filter=${e}`)}}const n=new a;export{n as C};

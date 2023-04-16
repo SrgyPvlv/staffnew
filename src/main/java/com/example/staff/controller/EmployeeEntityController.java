@@ -73,6 +73,19 @@ public class EmployeeEntityController {
 			}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
 	
+	@GetMapping("/employees/factDepartmentOrPosition")
+	public ResponseEntity<List<EmployeeEntity>> findByFactDepartmentOrPositionIn(@RequestParam(required=false) List<String> filterDepartment,
+			@RequestParam(required=false) List<String> filterPosition){
+				
+		List<String> filter1=filterDepartment;
+		List<String> filter2=filterDepartment;
+		List<String> filter3=filterDepartment;
+		List<String> filter4=filterPosition;
+		
+			try {return new ResponseEntity<>(employeeEntityService.findByFactDepartmentOrPositionIn(filter1,filter2,filter3,filter4),HttpStatus.OK);
+			}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+	}
+		
 	@PostMapping("/employees")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<EmployeeEntity> addEmployeeEntity(@RequestBody EmployeeEntity employeeEntity){

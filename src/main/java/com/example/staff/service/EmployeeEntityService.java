@@ -14,4 +14,6 @@ public interface EmployeeEntityService {
 	List<EmployeeEntity> findByNameMobilePositionContaining(String filter1,String filter2,String filter3);
 	List<EmployeeEntity> findByFactDivisionOrGroupeOrFunctionGroupOrderByNameAsc(String filter1,String filter2,String filter3);
 	List<EmployeeEntity> findByStaffDivisionOrGroupeOrFunctionGroupOrderByNameAsc(String filter1,String filter2,String filter3);
+	List<EmployeeEntity> findByFactDepartmentOrPositionIn(List<String> filter1,List<String> filter2,List<String> filter3,List<String> filter4);
+	
 }
