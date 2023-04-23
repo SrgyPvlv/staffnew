@@ -17,11 +17,11 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins="http://localhost:5173/")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/exel")
+@RequestMapping("/api/v1")
 public class ExelController {
 	private final ExelService exelService;
 	
-	@GetMapping("/download")
+	@GetMapping("/exel/download")
 	public ResponseEntity<Resource> getFile(){
 		String filename = "employees.xlsx";
 		InputStreamResource file = new InputStreamResource(exelService.load());
