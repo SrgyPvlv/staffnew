@@ -6,7 +6,7 @@ import com.example.staff.entity.CarEntity;
 
 public interface CarEntityService {
 
-	CarEntity getCarEntityById(Long ig);
+	CarEntity getCarEntityById(Long id);
 	List<CarEntity> getAllCarEntity();
 	CarEntity addCarEntity(CarEntity carEntity);
 	CarEntity editCarEntity(Long id, CarEntity carEntity);
