@@ -42,6 +42,13 @@ private final SertificateService sertificateService;
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
 	
+	@GetMapping("/sertificates/employeesid/{id}")
+	public ResponseEntity<List<SertificateEntity>> findSertificatesByEmployeeId(@PathVariable Long id){
+		try {
+			return ResponseEntity.ok(sertificateService.findSertificatesByEmployeeId(id));
+		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+	}
+	
 	@PostMapping("/sertificates")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<SertificateEntity> addSertificateEntity(@RequestBody SertificateEntity sertificate){

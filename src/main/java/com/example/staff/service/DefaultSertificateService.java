@@ -57,4 +57,10 @@ public class DefaultSertificateService implements SertificateService {
 		
 		sertificateRepository.deleteById(id);	
 	}
+
+	@Override
+	public List<SertificateEntity> findSertificatesByEmployeeId(Long id) {
+		
+		return sertificateRepository.findByEmployeeId(id);
+	}
 }

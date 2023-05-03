@@ -11,4 +11,5 @@ public interface SertificateService {
 	SertificateEntity addSertificateEntity(SertificateEntity sertificate);
 	SertificateEntity editSertificateEntity(Long id, SertificateEntity sertificate);
 	void deleteSertificateEntityById(Long id);
+	List<SertificateEntity> findSertificatesByEmployeeId(Long id);
 }
