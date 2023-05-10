@@ -21,10 +21,32 @@ import lombok.RequiredArgsConstructor;
 public class ExelController {
 	private final ExelService exelService;
 	
-	@GetMapping("/exel/download")
-	public ResponseEntity<Resource> getFile(){
+	@GetMapping("/exel/download/employees")
+	public ResponseEntity<Resource> getEmployeesFile(){
 		String filename = "employees.xlsx";
-		InputStreamResource file = new InputStreamResource(exelService.load());
+		InputStreamResource file = new InputStreamResource(exelService.employeesLoad());
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+				.body(file);
+	}
+	
+	@GetMapping("/exel/download/cars")
+	public ResponseEntity<Resource> getCarsFile(){
+		String filename = "cars.xlsx";
+		InputStreamResource file = new InputStreamResource(exelService.carsLoad());
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+				.body(file);
+	}
+	
+	@GetMapping("/exel/download/sertificates")
+	public ResponseEntity<Resource> getSertificatesFile(){
+		String filename = "sertificates.xlsx";
+		InputStreamResource file = new InputStreamResource(exelService.sertificatesLoad());
 		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)

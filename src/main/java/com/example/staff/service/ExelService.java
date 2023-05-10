@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 
 public interface ExelService {
 	
-	ByteArrayInputStream load();
+	ByteArrayInputStream employeesLoad();
+	ByteArrayInputStream carsLoad();
+	ByteArrayInputStream sertificatesLoad();
 
 }
