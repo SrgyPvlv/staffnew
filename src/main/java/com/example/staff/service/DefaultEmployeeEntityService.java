@@ -50,7 +50,6 @@ public class DefaultEmployeeEntityService implements EmployeeEntityService {
 		editedEmployeeEntity.setStaffDepartment(employeeEntity.getStaffDepartment());
 		editedEmployeeEntity.setCar(employeeEntity.getCar());
 		editedEmployeeEntity.setPosition(employeeEntity.getPosition());
-		editedEmployeeEntity.setSertificates(employeeEntity.getSertificates());
 		
 		return employeeRepository.saveAndFlush(editedEmployeeEntity);
 	}

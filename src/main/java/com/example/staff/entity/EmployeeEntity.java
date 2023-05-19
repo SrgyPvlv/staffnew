@@ -15,7 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -58,7 +59,7 @@ public class EmployeeEntity {
 	private PositionEntity position;
 	
 	@OneToMany(mappedBy="employee",cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<SertificateEntity> sertificates=new ArrayList<>();
 	
 	public void addSertificateEntity(SertificateEntity sertificateEntity) {
