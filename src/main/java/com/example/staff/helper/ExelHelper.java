@@ -23,7 +23,7 @@ public class ExelHelper {
 	static String[] CARHEADERs = {"Модель автомобиля", "Номер автомобиля", "Комментарий по автомобилю", "Сотрудник", 
 			"Мобильный тел.", "Фактическое подразделение"};
 	static String[] SERTIFICATEHEADERs = {"Тип удостоверения", "Номер удостоверения", "Группа безопасности", "Дата выдачи",
-			"Дата окончания", "Сотрудник", "Фактическое подразделение", "Штатное подразделение"};
+			"Дата окончания", "Сотрудник", "Должность", "Фактическое подразделение", "Штатное подразделение"};
 	static String SHEET = "Сотрудники ОЭРП";
 	static String CARSHEET = "Автомобили ОЭРП";
 	static String SERTIFICATESHEET = "Удостоверения ОЭРП";
@@ -136,14 +136,15 @@ public class ExelHelper {
 	        try {row.createCell(3).setCellValue(sertificate.getIssueDate());} catch(Exception ex) {row.createCell(3).setCellValue("");};
 	        try {row.createCell(4).setCellValue(sertificate.getExpirationDate());} catch(Exception ex) {row.createCell(4).setCellValue("");};
 	        try {row.createCell(5).setCellValue(sertificate.getEmployee().getName());} catch(Exception ex) {row.createCell(5).setCellValue("");};
+	        try {row.createCell(6).setCellValue(sertificate.getEmployee().getPosition().getPosition());} catch(Exception ex) {row.createCell(6).setCellValue("");};
 	        
-	        try {row.createCell(6).setCellValue(sertificate.getEmployee().getFactDepartment().getFunctionGroup().getFunctionGroup());} 
-	        catch(Exception ex) {try {row.createCell(6).setCellValue(sertificate.getEmployee().getFactDepartment().getGroupe().getGroupe());}
-	           catch(Exception ex2) {row.createCell(6).setCellValue(sertificate.getEmployee().getFactDepartment().getDivision().getDivision());}};
+	        try {row.createCell(7).setCellValue(sertificate.getEmployee().getFactDepartment().getFunctionGroup().getFunctionGroup());} 
+	        catch(Exception ex) {try {row.createCell(7).setCellValue(sertificate.getEmployee().getFactDepartment().getGroupe().getGroupe());}
+	           catch(Exception ex2) {row.createCell(7).setCellValue(sertificate.getEmployee().getFactDepartment().getDivision().getDivision());}};
 	        		
-	           try {row.createCell(7).setCellValue(sertificate.getEmployee().getStaffDepartment().getFunctionGroup().getFunctionGroup());} 
-		        catch(Exception ex) {try {row.createCell(7).setCellValue(sertificate.getEmployee().getStaffDepartment().getGroupe().getGroupe());}
-		           catch(Exception ex2) {row.createCell(7).setCellValue(sertificate.getEmployee().getStaffDepartment().getDivision().getDivision());}};  
+	           try {row.createCell(8).setCellValue(sertificate.getEmployee().getStaffDepartment().getFunctionGroup().getFunctionGroup());} 
+		        catch(Exception ex) {try {row.createCell(8).setCellValue(sertificate.getEmployee().getStaffDepartment().getGroupe().getGroupe());}
+		           catch(Exception ex2) {row.createCell(8).setCellValue(sertificate.getEmployee().getStaffDepartment().getDivision().getDivision());}};  
 	      }
 
 	      workbook.write(out);
