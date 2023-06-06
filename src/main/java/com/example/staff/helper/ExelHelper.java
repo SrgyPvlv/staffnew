@@ -96,8 +96,8 @@ public class ExelHelper {
 	        try {row.createCell(1).setCellValue(car.getCarNumber());} catch(Exception ex) {row.createCell(1).setCellValue("");};
 	        try {row.createCell(2).setCellValue(car.getCarComment());} catch(Exception ex) {row.createCell(2).setCellValue("");};
 	        try {row.createCell(3).setCellValue(car.getEmployee().getName());} catch(Exception ex) {row.createCell(3).setCellValue("");};
-	        try {row.createCell(4).setCellValue(car.getEmployee().getPosition().getPosition());} catch(Exception ex) {row.createCell(1).setCellValue("");};
-	        try {row.createCell(5).setCellValue(car.getEmployee().getMobilePhone());} catch(Exception ex) {row.createCell(4).setCellValue("");};
+	        try {row.createCell(4).setCellValue(car.getEmployee().getPosition().getPosition());} catch(Exception ex) {row.createCell(4).setCellValue("");};
+	        try {row.createCell(5).setCellValue(car.getEmployee().getMobilePhone());} catch(Exception ex) {row.createCell(5).setCellValue("");};
 	        
 	        try {row.createCell(6).setCellValue(car.getEmployee().getFactDepartment().getFunctionGroup().getFunctionGroup());} 
 	        catch(Exception ex) {try {row.createCell(6).setCellValue(car.getEmployee().getFactDepartment().getGroupe().getGroupe());}
