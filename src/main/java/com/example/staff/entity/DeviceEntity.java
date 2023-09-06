@@ -42,5 +42,9 @@ public class DeviceEntity {
 	private String deviceAccounting;
 	
 	private String storePlace;
+	
+	private boolean verificationNeed;
+	
+	private boolean isInVerification;
 
 }
