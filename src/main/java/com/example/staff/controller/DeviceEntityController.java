@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.example.staff.entity.DeviceEntity;
 import com.example.staff.service.DeviceEntityService;
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins="http://localhost:5173/")
 @RestController
+@SessionScope
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class DeviceEntityController {
@@ -36,19 +39,24 @@ public class DeviceEntityController {
 	}
 	
 	@GetMapping("/devices")
-	public ResponseEntity<List<DeviceEntity>> getAllDeviceNameEntity() {
-		try {
-			return ResponseEntity.ok(deviceEntityService.getAllDeviceEntity());
-		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+	public ResponseEntity<List<DeviceEntity>> findByNumberTypeNameEmployeeCommentPlace(@RequestParam(required=false) String filter){
+		if(filter!=null && filter.trim().length()!=0) {
+			String filter1=filter;
+			String filter2=filter;
+			String filter3=filter;
+			String filter4=filter;
+			String filter5=filter;
+			String filter6=filter;
+			try {
+				return ResponseEntity.ok(deviceEntityService.findByNumberTypeNameEmployeeCommentPlace(filter1,filter2,filter3,filter4,filter5,filter6));
+			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+		}else {
+			try {
+				return ResponseEntity.ok(deviceEntityService.getAllDeviceEntity());
+			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+		}
 	}
-	
-	@GetMapping("/devices/employeesid/{id}")
-	public ResponseEntity<List<DeviceEntity>> findDevicesByEmployeeId(@PathVariable Long id){
-		try {
-			return ResponseEntity.ok(deviceEntityService.findDevicesByEmployeeId(id));
-		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
-	}
-	
+		
 	@PostMapping("/devices")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<DeviceEntity> addDeviceNameEntity(@RequestBody DeviceEntity device) {

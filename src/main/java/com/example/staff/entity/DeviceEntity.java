@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="divices")
+@Table(name="devices")
 public class DeviceEntity {
 	
 	@Id
@@ -45,6 +45,6 @@ public class DeviceEntity {
 	
 	private boolean verificationNeed;
 	
-	private boolean isInVerification;
+	private boolean inVerification;
 
 }
