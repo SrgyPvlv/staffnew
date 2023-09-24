@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.example.staff.entity.CarEntity;
 import com.example.staff.entity.DeviceEntity;
 import com.example.staff.service.DeviceEntityService;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +61,7 @@ public class DeviceEntityController {
 		
 	@PostMapping("/devices")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-	public ResponseEntity<DeviceEntity> addDeviceNameEntity(@RequestBody DeviceEntity device) {
+	public ResponseEntity<DeviceEntity> addDeviceEntity(@RequestBody DeviceEntity device) {
 		try {
 			return new ResponseEntity<>(deviceEntityService.addDeviceEntity(device),HttpStatus.CREATED);
 		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
@@ -67,7 +69,15 @@ public class DeviceEntityController {
 	
 	@PutMapping("/devices/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-	public ResponseEntity<DeviceEntity> editDeviceNameEntity(@PathVariable Long id,@RequestBody DeviceEntity device) {
+	public ResponseEntity<DeviceEntity> editDeviceEntity(@PathVariable Long id,@RequestBody DeviceEntity device) {
+		try {
+			return new ResponseEntity<>(deviceEntityService.editDeviceEntity(id, device),HttpStatus.OK);
+		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
+	}
+	
+	@PatchMapping("/devices/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	public ResponseEntity<DeviceEntity> updateDeviceEntity(@PathVariable Long id,@RequestBody DeviceEntity device) {
 		try {
 			return new ResponseEntity<>(deviceEntityService.editDeviceEntity(id, device),HttpStatus.OK);
 		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
