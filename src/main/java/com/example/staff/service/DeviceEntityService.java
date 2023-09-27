@@ -12,4 +12,5 @@ public interface DeviceEntityService {
 	DeviceEntity editDeviceEntity(Long id, DeviceEntity deviceEntity);
 	void deleteDeviceEntityById(Long id);
 	List<DeviceEntity> findByNumberTypeNameEmployeeCommentPlace(String filter1, String filter2, String filter3, String filter4, String filter5, String filter6);
+	List<DeviceEntity> findDevicesByEmployeeId(Long id);
 }

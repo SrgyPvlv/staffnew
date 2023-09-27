@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.SessionScope;
 
-import com.example.staff.entity.CarEntity;
 import com.example.staff.entity.DeviceEntity;
+import com.example.staff.entity.SertificateEntity;
 import com.example.staff.service.DeviceEntityService;
 import lombok.RequiredArgsConstructor;
 
@@ -57,6 +57,13 @@ public class DeviceEntityController {
 				return ResponseEntity.ok(deviceEntityService.getAllDeviceEntity());
 			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 		}
+	}
+	
+	@GetMapping("/devices/employeesid/{id}")
+	public ResponseEntity<List<DeviceEntity>> findDevicesByEmployeeId(@PathVariable Long id){
+		try {
+			return ResponseEntity.ok(deviceEntityService.findDevicesByEmployeeId(id));
+		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
 		
 	@PostMapping("/devices")
