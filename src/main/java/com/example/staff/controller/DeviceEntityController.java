@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.example.staff.entity.DeviceEntity;
-import com.example.staff.entity.SertificateEntity;
 import com.example.staff.service.DeviceEntityService;
 import lombok.RequiredArgsConstructor;
 

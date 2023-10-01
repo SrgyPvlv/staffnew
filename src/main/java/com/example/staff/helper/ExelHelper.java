@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.example.staff.entity.CarEntity;
+import com.example.staff.entity.DeviceEntity;
 import com.example.staff.entity.EmployeeEntity;
 import com.example.staff.entity.SertificateEntity;
 
@@ -24,9 +25,12 @@ public class ExelHelper {
 			"Должность", "Мобильный тел.", "Фактическое подразделение", "Штатное подразделение"};
 	static String[] SERTIFICATEHEADERs = {"Тип удостоверения", "Номер удостоверения", "Группа безопасности", "Дата выдачи",
 			"Дата окончания", "Сотрудник", "Должность", "Фактическое подразделение", "Штатное подразделение"};
+	static String[] DEVICEHEADERs = {"Тип прибора", "Наименование прибора", "Номер прибора", "Владелец прибора",
+			"Комментарий", "Номер бухучета", "Место хранения", "Подлежит поверке", "Находится в поверке"};
 	static String SHEET = "Сотрудники ОЭРП";
 	static String CARSHEET = "Автомобили ОЭРП";
 	static String SERTIFICATESHEET = "Удостоверения ОЭРП";
+	static String DEVICESSHEET = "Приборы ОЭРП";
 	
 	public static ByteArrayInputStream employeesToExcel(List<EmployeeEntity> employees) {
 
@@ -152,6 +156,42 @@ public class ExelHelper {
 	           try {row.createCell(8).setCellValue(sertificate.getEmployee().getStaffDepartment().getFunctionGroup().getFunctionGroup());} 
 		        catch(Exception ex) {try {row.createCell(8).setCellValue(sertificate.getEmployee().getStaffDepartment().getGroupe().getGroupe());}
 		           catch(Exception ex2) {row.createCell(8).setCellValue(sertificate.getEmployee().getStaffDepartment().getDivision().getDivision());}};  
+	      }
+
+	      workbook.write(out);
+	      return new ByteArrayInputStream(out.toByteArray());
+	    } catch (IOException e) {
+	      throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
+	    }
+	  }
+	
+	public static ByteArrayInputStream devicesToExcel(List<DeviceEntity> devices) {
+
+	    try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
+	      Sheet sheet = workbook.createSheet(DEVICESSHEET);
+
+	      // Header
+	      Row headerRow = sheet.createRow(0);
+
+	      for (int col = 0; col < DEVICEHEADERs.length; col++) {
+	        Cell cell = headerRow.createCell(col);
+	        cell.setCellValue(DEVICEHEADERs[col]);
+	      }
+
+	      int rowIdx = 1;
+	      for (DeviceEntity device : devices) {
+	        Row row = sheet.createRow(rowIdx++);
+
+	        try {row.createCell(0).setCellValue(device.getDeviceType().getDeviceTypeName());} catch(Exception ex) {row.createCell(0).setCellValue("");};
+	        try {row.createCell(1).setCellValue(device.getDeviceName().getDeviceName());} catch(Exception ex) {row.createCell(1).setCellValue("");};
+	        try {row.createCell(2).setCellValue(device.getDeviceNumber());} catch(Exception ex) {row.createCell(2).setCellValue("");};
+	        try {row.createCell(3).setCellValue(device.getEmployee().getName());} catch(Exception ex) {row.createCell(3).setCellValue("");};
+	        try {row.createCell(4).setCellValue(device.getDeviceComment());} catch(Exception ex) {row.createCell(4).setCellValue("");};
+	        try {row.createCell(5).setCellValue(device.getDeviceAccounting());} catch(Exception ex) {row.createCell(5).setCellValue("");};
+	        try {row.createCell(6).setCellValue(device.getStorePlace());} catch(Exception ex) {row.createCell(6).setCellValue("");};
+	        try {if(device.isVerificationNeed()) {row.createCell(7).setCellValue("да");}else{row.createCell(7).setCellValue("нет");}} catch(Exception ex) {row.createCell(7).setCellValue("");};
+	        try {if(device.isInVerification()) {row.createCell(8).setCellValue("да");}else{row.createCell(8).setCellValue("нет");}} catch(Exception ex) {row.createCell(7).setCellValue("");};
+	          
 	      }
 
 	      workbook.write(out);
