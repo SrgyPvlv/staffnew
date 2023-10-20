@@ -74,7 +74,7 @@ public class DeviceEntityController {
 	}
 	
 	@PutMapping("/devices/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TESTER')")
 	public ResponseEntity<DeviceEntity> editDeviceEntity(@PathVariable Long id,@RequestBody DeviceEntity device) {
 		try {
 			return new ResponseEntity<>(deviceEntityService.editDeviceEntity(id, device),HttpStatus.OK);
@@ -82,7 +82,7 @@ public class DeviceEntityController {
 	}
 	
 	@PatchMapping("/devices/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TESTER')")
 	public ResponseEntity<DeviceEntity> updateDeviceEntity(@PathVariable Long id,@RequestBody DeviceEntity device) {
 		try {
 			return new ResponseEntity<>(deviceEntityService.editDeviceEntity(id, device),HttpStatus.OK);

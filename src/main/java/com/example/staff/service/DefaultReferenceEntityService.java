@@ -47,7 +47,8 @@ public class DefaultReferenceEntityService implements ReferenceEntityService {
 		editedReference.setReferenceAddress(reference.getReferenceAddress());
 		editedReference.setReferenceOverview(reference.getReferenceOverview());
 		editedReference.setReferenceTheme(reference.getReferenceTheme());
-		return editedReference;
+		
+		return referenceRepository.saveAndFlush(editedReference);
 	}
 
 	@Override
