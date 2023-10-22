@@ -52,6 +52,7 @@ public class DefaultDeviceEntityService implements DeviceEntityService {
 		editedDevice.setStorePlace(device.getStorePlace());
 		editedDevice.setVerificationNeed(device.isVerificationNeed());
 		editedDevice.setInVerification(device.isInVerification());
+		editedDevice.setDateMoving(device.getDateMoving());
 		
 		return deviceRepository.saveAndFlush(editedDevice);
 	}

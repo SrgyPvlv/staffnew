@@ -26,7 +26,7 @@ public class ExelHelper {
 	static String[] SERTIFICATEHEADERs = {"Тип удостоверения", "Номер удостоверения", "Группа безопасности", "Дата выдачи",
 			"Дата окончания", "Сотрудник", "Должность", "Фактическое подразделение", "Штатное подразделение"};
 	static String[] DEVICEHEADERs = {"Тип прибора", "Наименование прибора", "Номер прибора", "Владелец прибора", "Фактическое подразделение",
-			"Комментарий", "Номер бухучета", "Место хранения", "Подлежит поверке", "Находится в поверке"};
+			"Комментарий", "Номер бухучета", "Место хранения", "Подлежит поверке", "Находится в поверке", "Дата сдачи/возврата в/из поверку/и"};
 	static String SHEET = "Сотрудники ОЭРП";
 	static String CARSHEET = "Автомобили ОЭРП";
 	static String SERTIFICATESHEET = "Удостоверения ОЭРП";
@@ -196,6 +196,7 @@ public class ExelHelper {
 	        try {row.createCell(7).setCellValue(device.getStorePlace());} catch(Exception ex) {row.createCell(7).setCellValue("");};
 	        try {if(device.isVerificationNeed()) {row.createCell(8).setCellValue("да");}else{row.createCell(8).setCellValue("нет");}} catch(Exception ex) {row.createCell(8).setCellValue("");};
 	        try {if(device.isInVerification()) {row.createCell(9).setCellValue("да");}else{row.createCell(9).setCellValue("нет");}} catch(Exception ex) {row.createCell(9).setCellValue("");};
+	        try {row.createCell(10).setCellValue(device.getDateMoving());} catch(Exception ex) {row.createCell(10).setCellValue("");};
 	          
 	      }
 

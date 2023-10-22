@@ -1,5 +1,7 @@
 package com.example.staff.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,5 +48,7 @@ public class DeviceEntity {
 	private boolean verificationNeed;
 	
 	private boolean inVerification;
+	
+	private LocalDate dateMoving;
 
 }
