@@ -8,5 +8,6 @@ public interface ExelService {
 	ByteArrayInputStream carsLoad();
 	ByteArrayInputStream sertificatesLoad();
 	ByteArrayInputStream devicesLoad();
+	ByteArrayInputStream toolsLoad();
 
 }

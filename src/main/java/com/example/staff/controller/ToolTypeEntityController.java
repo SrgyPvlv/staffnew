@@ -58,7 +58,7 @@ public class ToolTypeEntityController {
 		catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
 	}
 	
-	@DeleteMapping("/tooltype/{id}")
+	@DeleteMapping("/tooltypes/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteToolTypeEntity(@PathVariable Long id){
 		

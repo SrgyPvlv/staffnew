@@ -64,5 +64,16 @@ public class ExelController {
 				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
 				.body(file);
 	}
+	
+	@GetMapping("/exel/download/tools")
+	public ResponseEntity<Resource> getToolsFile(){
+		String filename = "tools.xlsx";
+		InputStreamResource file = new InputStreamResource(exelService.toolsLoad());
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+				.body(file);
+	}
 
 }

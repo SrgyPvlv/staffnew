@@ -8,13 +8,16 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.staff.entity.DeviceEntity;
 import com.example.staff.entity.ToolEntity;
 import com.example.staff.service.ToolEntityService;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +38,30 @@ private final ToolEntityService toolEntityService;
 	}
 	
 	@GetMapping("/tools")
-	public ResponseEntity<List<ToolEntity>> getAllToolEntity(){
+	public ResponseEntity<List<ToolEntity>> findByNumberTypeNameEmployeeCommentPlace(@RequestParam(required=false) String filter){
 		
-		try {return ResponseEntity.ok(toolEntityService.getAllToolEntity());}
-		catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+		if(filter!=null && filter.trim().length()!=0) {
+			String filter1=filter;
+			String filter2=filter;
+			String filter3=filter;
+			String filter4=filter;
+			String filter5=filter;
+			String filter6=filter;
+			try {
+				return ResponseEntity.ok(toolEntityService.findByNumberTypeNameEmployeeCommentPlace(filter1,filter2,filter3,filter4,filter5,filter6));
+			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+		}else {
+			try {
+				return ResponseEntity.ok(toolEntityService.getAllToolEntity());
+			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
+		}
+	}
+	
+	@GetMapping("/tools/employeesid/{id}")
+	public ResponseEntity<List<ToolEntity>> findDevicesByEmployeeId(@PathVariable Long id){
+		try {
+			return ResponseEntity.ok(toolEntityService.findToolsByEmployeeId(id));
+		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
 	
 	@PostMapping("/tools")
@@ -55,6 +78,14 @@ private final ToolEntityService toolEntityService;
 		
 		try {return new ResponseEntity<>(toolEntityService.editToolEntity(id, tool), HttpStatus.OK);}
 		catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
+	}
+	
+	@PatchMapping("/tools/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TESTER')")
+	public ResponseEntity<ToolEntity> updateToolEntity(@PathVariable Long id,@RequestBody ToolEntity tool) {
+		try {
+			return new ResponseEntity<>(toolEntityService.editToolEntity(id, tool),HttpStatus.OK);
+		} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
 	}
 	
 	@DeleteMapping("/tools/{id}")

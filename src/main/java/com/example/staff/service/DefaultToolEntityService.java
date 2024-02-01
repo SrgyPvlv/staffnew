@@ -59,4 +59,17 @@ public class DefaultToolEntityService implements ToolEntityService {
 
 	}
 
+	@Override
+	public List<ToolEntity> findByNumberTypeNameEmployeeCommentPlace(String filter1, String filter2, String filter3,
+			String filter4, String filter5, String filter6) {
+		
+		return toolRepository.findByToolNumberIgnoreCaseContainingOrToolTypeToolTypeNameIgnoreCaseContainingOrToolNameToolNameIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrToolCommentIgnoreCaseContainingOrStorePlaceIgnoreCaseContainingOrderByToolType(filter1, filter2, filter3, filter4, filter5, filter6);
+	}
+
+	@Override
+	public List<ToolEntity> findToolsByEmployeeId(Long id) {
+		
+		return toolRepository.findByEmployeeId(id);
+	}
+
 }

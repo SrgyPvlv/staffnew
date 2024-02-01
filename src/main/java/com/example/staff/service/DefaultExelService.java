@@ -9,11 +9,13 @@ import com.example.staff.entity.CarEntity;
 import com.example.staff.entity.DeviceEntity;
 import com.example.staff.entity.EmployeeEntity;
 import com.example.staff.entity.SertificateEntity;
+import com.example.staff.entity.ToolEntity;
 import com.example.staff.helper.ExelHelper;
 import com.example.staff.repository.CarRepository;
 import com.example.staff.repository.DeviceRepository;
 import com.example.staff.repository.EmployeeRepository;
 import com.example.staff.repository.SertificateRepository;
+import com.example.staff.repository.ToolRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,7 @@ public class DefaultExelService implements ExelService {
 	private final CarRepository carRepository;
 	private final SertificateRepository sertificateRepository;
 	private final DeviceRepository deviceRepository;
+	private final ToolRepository toolRepository;
 
 	@Override
 	public ByteArrayInputStream employeesLoad() {
@@ -58,6 +61,15 @@ public class DefaultExelService implements ExelService {
 		
 		List<DeviceEntity> devices = deviceRepository.findAll();
 		ByteArrayInputStream in = ExelHelper.devicesToExcel(devices);
+		
+		return in;
+	}
+
+	@Override
+	public ByteArrayInputStream toolsLoad() {
+		
+		List<ToolEntity> tools = toolRepository.findAll();
+		ByteArrayInputStream in = ExelHelper.toolsToExcel(tools);
 		
 		return in;
 	}
