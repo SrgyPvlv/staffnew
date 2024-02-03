@@ -73,7 +73,7 @@ private final ToolEntityService toolEntityService;
 	}
 	
 	@PutMapping("/tools/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TESTER')")
 	public ResponseEntity<ToolEntity> editToolEntity(@PathVariable Long id, @RequestBody ToolEntity tool){
 		
 		try {return new ResponseEntity<>(toolEntityService.editToolEntity(id, tool), HttpStatus.OK);}
