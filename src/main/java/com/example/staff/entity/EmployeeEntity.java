@@ -71,6 +71,5 @@ public class EmployeeEntity {
 		sertificates.remove(sertificateEntity);
 		sertificateEntity.setEmployee(null);
 	}
-	
-	
+		
 }

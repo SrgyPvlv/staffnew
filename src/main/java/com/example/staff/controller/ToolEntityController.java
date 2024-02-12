@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.staff.entity.DeviceEntity;
 import com.example.staff.entity.ToolEntity;
 import com.example.staff.service.ToolEntityService;
 import lombok.RequiredArgsConstructor;
