@@ -2,12 +2,10 @@ package com.example.staff.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,7 +13,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.staff.entity.AvatarEntity;
@@ -43,6 +40,7 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 		Optional<AvatarEntity> avatarOpt = Optional.ofNullable(avatarRepository.findByEmployeeId(employeeId));
 		AvatarEntity avatar;
 		String filename;
+		
 		if(!avatarOpt.isPresent()) {
 			filename = UUID.randomUUID().toString()+".JPG";
 			EmployeeEntity employee = employeeRepository.findById(employeeId)
@@ -56,13 +54,12 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 		
 		avatarRepository.save(avatar);
 		
-		Path sourcePath = Paths.get(path,file.getOriginalFilename());
         Path destPath = Paths.get(path,filename);
-        System.out.println("path = " + path);
-        System.out.println("sourcePath = " + sourcePath);
         System.out.println("destPath = " + destPath);
-						
-			try {	Files.copy(sourcePath, destPath, StandardCopyOption.REPLACE_EXISTING);
+        						
+			try {	InputStream is = file.getInputStream();
+			Files.copy(is, destPath, StandardCopyOption.REPLACE_EXISTING);
+			is.close();
 			
 		} catch (IOException ex) {throw new IllegalStateException(ex);}
 
