@@ -30,6 +30,8 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 	private final AvatarRepository avatarRepository;
 	private final EmployeeRepository employeeRepository;
 	
+	//private static String HOME = System.getProperty("user.home");
+	
 	@Value("${file.storage.path}")
 	private String path;
 	
@@ -42,7 +44,7 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 		String filename;
 		
 		if(!avatarOpt.isPresent()) {
-			filename = UUID.randomUUID().toString()+".JPG";
+			filename = UUID.randomUUID().toString()+".jpg";
 			EmployeeEntity employee = employeeRepository.findById(employeeId)
 					.orElseThrow(() -> new ItemNotFoundException("Employee not found: id = " + employeeId));
 			avatar = new AvatarEntity(null, contentType, filename, employee);
@@ -63,6 +65,22 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 			
 		} catch (IOException ex) {throw new IllegalStateException(ex);}
 
+	}
+
+	@Override
+	public Optional<String> getContentTypeByEmployeeId(Long id) {
+		
+		Optional<AvatarEntity> avatarOpt = Optional.ofNullable(avatarRepository.findByEmployeeId(id));
+		return avatarOpt.map(AvatarEntity::getContentType);
+	}
+
+	@Override
+	public Optional<byte[]> getAvatarEntityByEmployeeId(Long id) {
+		
+		Optional<AvatarEntity> avatarOpt = Optional.ofNullable(avatarRepository.findByEmployeeId(id));
+		return avatarOpt.map(AvatarEntity::getFileName).map(filename ->{
+			try {return Files.readAllBytes(Paths.get(path,filename));} catch (Exception ex) {throw new IllegalStateException(ex);}
+		});
 	}
 
 }

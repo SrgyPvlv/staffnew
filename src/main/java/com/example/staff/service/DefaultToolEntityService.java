@@ -49,6 +49,9 @@ public class DefaultToolEntityService implements ToolEntityService {
 		editedTool.setToolComment(toolEntity.getToolComment());
 		editedTool.setToolAccounting(toolEntity.getToolAccounting());
 		editedTool.setStorePlace(toolEntity.getStorePlace());
+		editedTool.setInMoving(toolEntity.isInMoving());
+		editedTool.setDateMoving(toolEntity.getDateMoving());
+		editedTool.setCommentMoving(toolEntity.getCommentMoving());
 		return toolRepository.saveAndFlush(editedTool);
 	}
 

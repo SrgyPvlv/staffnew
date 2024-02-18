@@ -1,5 +1,8 @@
 package com.example.staff.entity;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,4 +45,11 @@ public class ToolEntity {
 	private String toolAccounting;
 	
 	private String storePlace;
+	
+	@Column(columnDefinition = "boolean default false")
+	private boolean inMoving;
+	
+	private LocalDate dateMoving;
+	
+	private String commentMoving;
 }

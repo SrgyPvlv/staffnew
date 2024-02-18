@@ -9,4 +9,5 @@ import com.example.staff.entity.AvatarEntity;
 public interface AvatarRepository extends JpaRepository<AvatarEntity, Long> {
 
 	AvatarEntity findByEmployeeId(Long id);
+	
 }
