@@ -27,7 +27,7 @@ public class AvatarController {
 	private final AvatarEntityService avatarEntityService;
 	
 	@PostMapping("/avatars/{id}")
-	//@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> updateAvatar(@PathVariable Long id, @RequestParam("avatar") MultipartFile avatar){
 		
 		try {

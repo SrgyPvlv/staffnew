@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.staff.entity.CarModelEntity;
-import com.example.staff.service.CarModelEntityService;
+import com.example.staff.entity.CarParkingEntity;
+import com.example.staff.service.CarParkingEntityService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,45 +24,45 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class CarModelEntityController {
+public class CarParkingEntityController {
 
-	private final CarModelEntityService carModelEntityService;
+	private CarParkingEntityService carParkingEntityService;
 	
-	@GetMapping("/carmodels/{id}")
-	public ResponseEntity<CarModelEntity> getCarModelEntityById(@PathVariable Long id){
+	@GetMapping("/carparkings/{id}")
+	public ResponseEntity<CarParkingEntity> getCarParkingEntityById(@PathVariable Long id){
 		try {
-			return new ResponseEntity<>(carModelEntityService.getCarModelEntityById(id), HttpStatus.OK);
+			return new ResponseEntity<>(carParkingEntityService.getCarParkingEntityById(id), HttpStatus.OK);
 		}catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
 	
-	@GetMapping("/carmodels")
-	public ResponseEntity<List<CarModelEntity>> getAllCarModelEntity(){
+	@GetMapping("/carparkings")
+	public ResponseEntity<List<CarParkingEntity>> getAllCarParkingEntity(){
 		try {
-			return new ResponseEntity<>(carModelEntityService.getAllCarModelEntity(), HttpStatus.OK);
+			return new ResponseEntity<>(carParkingEntityService.getAllCarParkingEntity(), HttpStatus.OK);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
 	
-	@PostMapping("/carmodels")
+	@PostMapping("/carparkings")
 	//@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-	public ResponseEntity<CarModelEntity> addCarModelEntity(@RequestBody CarModelEntity carModelEntity){
+	public ResponseEntity<CarParkingEntity> addCarParkingEntity(@RequestBody CarParkingEntity carParkingEntity){
 		try {	
-			return new ResponseEntity<>(carModelEntityService.addCarModelEntity(carModelEntity),HttpStatus.CREATED);
+			return new ResponseEntity<>(carParkingEntityService.addCarParkingEntity(carParkingEntity),HttpStatus.CREATED);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
 	}
 	
-	@PutMapping("/carmodels/{id}")
+	@PutMapping("/carparkings/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-	public ResponseEntity<CarModelEntity> editCarModelEntity(@PathVariable Long id, @RequestBody CarModelEntity carModelEntity){
+	public ResponseEntity<CarParkingEntity> editCarParkingEntity(@PathVariable Long id, @RequestBody CarParkingEntity carParkingEntity){
 		try {
-			return new ResponseEntity<>(carModelEntityService.editCarModelEntity(id, carModelEntity),HttpStatus.OK);
+			return new ResponseEntity<>(carParkingEntityService.editCarParkingEntity(id, carParkingEntity),HttpStatus.OK);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
 	}
 	
-	@DeleteMapping("/carmodels/{id}")
+	@DeleteMapping("/carparkings/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-	public ResponseEntity<HttpStatus> deleteCarModelEntityById(@PathVariable Long id){
+	public ResponseEntity<HttpStatus> deleteCarParkingEntityById(@PathVariable Long id){
 		try {
-			carModelEntityService.deleteCarModelEntityById(id);
+			carParkingEntityService.deleteCarParkingEntityById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 	}
