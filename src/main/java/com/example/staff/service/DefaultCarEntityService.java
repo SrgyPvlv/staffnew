@@ -44,6 +44,7 @@ public class DefaultCarEntityService implements CarEntityService {
 		editedCarEntity.setCarNumber(carEntity.getCarNumber());
 		editedCarEntity.setCarComment(carEntity.getCarComment());
 		editedCarEntity.setCarModel(carEntity.getCarModel());
+		editedCarEntity.setCarParking(carEntity.getCarParking());
 		
 		return carRepository.saveAndFlush(editedCarEntity);
 	}

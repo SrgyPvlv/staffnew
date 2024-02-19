@@ -43,7 +43,7 @@ public class CarModelEntityController {
 	}
 	
 	@PostMapping("/carmodels")
-	//@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarModelEntity> addCarModelEntity(@RequestBody CarModelEntity carModelEntity){
 		try {	
 			return new ResponseEntity<>(carModelEntityService.addCarModelEntity(carModelEntity),HttpStatus.CREATED);

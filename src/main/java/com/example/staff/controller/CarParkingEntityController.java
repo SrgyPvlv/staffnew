@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1")
 public class CarParkingEntityController {
 
-	private CarParkingEntityService carParkingEntityService;
+	private final CarParkingEntityService carParkingEntityService;
 	
 	@GetMapping("/carparkings/{id}")
 	public ResponseEntity<CarParkingEntity> getCarParkingEntityById(@PathVariable Long id){
@@ -43,7 +43,7 @@ public class CarParkingEntityController {
 	}
 	
 	@PostMapping("/carparkings")
-	//@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<CarParkingEntity> addCarParkingEntity(@RequestBody CarParkingEntity carParkingEntity){
 		try {	
 			return new ResponseEntity<>(carParkingEntityService.addCarParkingEntity(carParkingEntity),HttpStatus.CREATED);
