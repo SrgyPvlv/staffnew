@@ -22,14 +22,14 @@ public class ExelHelper {
 	static String[] HEADERs = { "ФИО", "Должность", "Мобильный тел.", "Местный тел.", "Дата рождения", "Табельный номер",
 			"Логин", "Почта", "Модель автомобиля", "Номер автомобиля", "Комментарий по автомобилю", "Фактическое подразделение",
 			"Штатное подразделение", "Комментарий по сотруднику"};
-	static String[] CARHEADERs = {"Модель автомобиля", "Номер автомобиля", "Комментарий по автомобилю", "Сотрудник",
+	static String[] CARHEADERs = {"Модель автомобиля", "Номер автомобиля", "Место стоянки", "Комментарий по автомобилю", "Сотрудник",
 			"Должность", "Мобильный тел.", "Фактическое подразделение", "Штатное подразделение"};
 	static String[] SERTIFICATEHEADERs = {"Тип удостоверения", "Номер удостоверения", "Группа безопасности", "Дата выдачи",
 			"Дата окончания", "Сотрудник", "Должность", "Фактическое подразделение", "Штатное подразделение"};
 	static String[] DEVICEHEADERs = {"Тип прибора", "Наименование прибора", "Номер прибора", "Владелец прибора", "Фактическое подразделение",
 			"Комментарий", "Номер бухучета", "Место хранения", "Подлежит поверке", "Находится в поверке", "Дата сдачи/возврата в/из поверку/и"};
 	static String[] TOOLHEADERs = {"Тип инструмента", "Наименование инструмента", "Номер инструмента", "Владелец инструмента", "Фактическое подразделение",
-			"Комментарий", "Номер бухучета", "Место хранения"};
+			"Комментарий", "Номер бухучета", "Место хранения", "Временно передан", "Дата передачи/возврата", "Кому передан"};
 	static String SHEET = "Сотрудники ОЭРП";
 	static String CARSHEET = "Автомобили ОЭРП";
 	static String SERTIFICATESHEET = "Удостоверения ОЭРП";
@@ -102,21 +102,22 @@ public class ExelHelper {
 
 	        try {row.createCell(0).setCellValue(car.getCarModel().getCarModel());} catch(Exception ex) {row.createCell(0).setCellValue("");};
 	        try {row.createCell(1).setCellValue(car.getCarNumber());} catch(Exception ex) {row.createCell(1).setCellValue("");};
-	        try {row.createCell(2).setCellValue(car.getCarComment());} catch(Exception ex) {row.createCell(2).setCellValue("");};
-	        try {row.createCell(3).setCellValue(car.getEmployee().getName());} catch(Exception ex) {row.createCell(3).setCellValue("");};
-	        try {row.createCell(4).setCellValue(car.getEmployee().getPosition().getPosition());} catch(Exception ex) {row.createCell(4).setCellValue("");};
-	        try {row.createCell(5).setCellValue(car.getEmployee().getMobilePhone());} catch(Exception ex) {row.createCell(5).setCellValue("");};
+	        try {row.createCell(2).setCellValue(car.getCarParking().getParkingName());} catch(Exception ex) {row.createCell(2).setCellValue("");};
+	        try {row.createCell(3).setCellValue(car.getCarComment());} catch(Exception ex) {row.createCell(3).setCellValue("");};
+	        try {row.createCell(4).setCellValue(car.getEmployee().getName());} catch(Exception ex) {row.createCell(4).setCellValue("");};
+	        try {row.createCell(5).setCellValue(car.getEmployee().getPosition().getPosition());} catch(Exception ex) {row.createCell(5).setCellValue("");};
+	        try {row.createCell(6).setCellValue(car.getEmployee().getMobilePhone());} catch(Exception ex) {row.createCell(6).setCellValue("");};
 	        
-	        try {row.createCell(6).setCellValue(car.getEmployee().getFactDepartment().getFunctionGroup().getFunctionGroup());} 
-	        catch(Exception ex) {try {row.createCell(6).setCellValue(car.getEmployee().getFactDepartment().getGroupe().getGroupe());}
-	           catch(Exception ex2) {try {row.createCell(6).setCellValue(car.getEmployee().getFactDepartment().getDivision().getDivision());}
-	           catch(Exception ex3) {row.createCell(6).setCellValue("");}}
+	        try {row.createCell(7).setCellValue(car.getEmployee().getFactDepartment().getFunctionGroup().getFunctionGroup());} 
+	        catch(Exception ex) {try {row.createCell(7).setCellValue(car.getEmployee().getFactDepartment().getGroupe().getGroupe());}
+	           catch(Exception ex2) {try {row.createCell(7).setCellValue(car.getEmployee().getFactDepartment().getDivision().getDivision());}
+	           catch(Exception ex3) {row.createCell(7).setCellValue("");}}
 	           };
 	           
-	           try {row.createCell(7).setCellValue(car.getEmployee().getStaffDepartment().getFunctionGroup().getFunctionGroup());} 
-		        catch(Exception ex) {try {row.createCell(7).setCellValue(car.getEmployee().getStaffDepartment().getGroupe().getGroupe());}
-		           catch(Exception ex2) {try {row.createCell(7).setCellValue(car.getEmployee().getStaffDepartment().getDivision().getDivision());}
-		           catch(Exception ex3) {row.createCell(7).setCellValue("");}}
+	           try {row.createCell(8).setCellValue(car.getEmployee().getStaffDepartment().getFunctionGroup().getFunctionGroup());} 
+		        catch(Exception ex) {try {row.createCell(8).setCellValue(car.getEmployee().getStaffDepartment().getGroupe().getGroupe());}
+		           catch(Exception ex2) {try {row.createCell(8).setCellValue(car.getEmployee().getStaffDepartment().getDivision().getDivision());}
+		           catch(Exception ex3) {row.createCell(8).setCellValue("");}}
 		           };
 	  	      
 	      }
@@ -239,7 +240,10 @@ public class ExelHelper {
 	        
 	        try {row.createCell(5).setCellValue(tool.getToolComment());} catch(Exception ex) {row.createCell(5).setCellValue("");};
 	        try {row.createCell(6).setCellValue(tool.getToolAccounting());} catch(Exception ex) {row.createCell(6).setCellValue("");};
-	        try {row.createCell(7).setCellValue(tool.getStorePlace());} catch(Exception ex) {row.createCell(7).setCellValue("");};	          
+	        try {row.createCell(7).setCellValue(tool.getStorePlace());} catch(Exception ex) {row.createCell(7).setCellValue("");};
+	        try {if(tool.isInMoving()) {row.createCell(8).setCellValue("да");}else{row.createCell(8).setCellValue("нет");}} catch(Exception ex) {row.createCell(8).setCellValue("");};
+	        try {row.createCell(9).setCellValue(tool.getDateMoving());} catch(Exception ex) {row.createCell(9).setCellValue("");};
+	        try {row.createCell(10).setCellValue(tool.getCommentMoving());} catch(Exception ex) {row.createCell(10).setCellValue("");};
 	      }
 
 	      workbook.write(out);
