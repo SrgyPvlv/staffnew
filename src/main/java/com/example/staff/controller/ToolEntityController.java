@@ -72,7 +72,7 @@ private final ToolEntityService toolEntityService;
 	}
 	
 	@PutMapping("/tools/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TESTER')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TOOLER')")
 	public ResponseEntity<ToolEntity> editToolEntity(@PathVariable Long id, @RequestBody ToolEntity tool){
 		
 		try {return new ResponseEntity<>(toolEntityService.editToolEntity(id, tool), HttpStatus.OK);}
@@ -80,7 +80,7 @@ private final ToolEntityService toolEntityService;
 	}
 	
 	@PatchMapping("/tools/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TESTER')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN') or hasRole('TOOLER')")
 	public ResponseEntity<ToolEntity> updateToolEntity(@PathVariable Long id,@RequestBody ToolEntity tool) {
 		try {
 			return new ResponseEntity<>(toolEntityService.editToolEntity(id, tool),HttpStatus.OK);
