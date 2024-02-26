@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.CarParkingEntity;
@@ -26,7 +27,7 @@ public class DefaultCarParkingEntityService implements CarParkingEntityService {
 
 	@Override
 	public List<CarParkingEntity> getAllCarParkingEntity() {
-		List<CarParkingEntity> carparkings=carParkingRepository.findAll();
+		List<CarParkingEntity> carparkings=carParkingRepository.findAll(Sort.by(Sort.Direction.ASC,"parkingName"));
 		return carparkings;
 	}
 

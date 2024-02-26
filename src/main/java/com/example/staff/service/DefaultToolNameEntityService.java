@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.ToolNameEntity;
@@ -27,7 +28,7 @@ public class DefaultToolNameEntityService implements ToolNameEntityService {
 	@Override
 	public List<ToolNameEntity> getAllToolNameEntity() {
 		
-		return toolNameRepository.findAll();
+		return toolNameRepository.findAll(Sort.by(Sort.Direction.ASC,"toolName"));
 	}
 
 	@Override

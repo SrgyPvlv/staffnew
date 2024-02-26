@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.ToolEntity;
@@ -27,7 +28,7 @@ public class DefaultToolEntityService implements ToolEntityService {
 	@Override
 	public List<ToolEntity> getAllToolEntity() {
 		
-		return toolRepository.findAll();
+		return toolRepository.findAll(Sort.by(Sort.Direction.ASC,"toolType"));
 	}
 
 	@Override

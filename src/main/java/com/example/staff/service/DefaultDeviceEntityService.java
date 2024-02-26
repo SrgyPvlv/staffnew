@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.DeviceEntity;
@@ -28,7 +29,7 @@ public class DefaultDeviceEntityService implements DeviceEntityService {
 	@Override
 	public List<DeviceEntity> getAllDeviceEntity() {
 		
-		return deviceRepository.findAll();
+		return deviceRepository.findAll(Sort.by(Sort.Direction.ASC, "deviceType"));
 	}
 
 	@Override

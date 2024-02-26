@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.PositionEntity;
@@ -25,7 +26,7 @@ public class DefaultPositionEntityService implements PositionEntityService{
 
 	@Override
 	public List<PositionEntity> getAllPositionEntity() {
-		List<PositionEntity> positions=positionRepository.findAll();
+		List<PositionEntity> positions=positionRepository.findAll(Sort.by(Sort.Direction.ASC,"position"));
 		
 		return positions;
 	}
