@@ -9,5 +9,6 @@ public interface ExelService {
 	ByteArrayInputStream sertificatesLoad();
 	ByteArrayInputStream devicesLoad();
 	ByteArrayInputStream toolsLoad();
+	ByteArrayInputStream wardrobesLoad();
 
 }

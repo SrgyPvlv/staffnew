@@ -75,5 +75,16 @@ public class ExelController {
 				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
 				.body(file);
 	}
+	
+	@GetMapping("/exel/download/wardrobes")
+	public ResponseEntity<Resource> getWardrobesFile(){
+		String filename = "wardrobes.xlsx";
+		InputStreamResource file = new InputStreamResource(exelService.wardrobesLoad());
+		
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+				.contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+				.body(file);
+	}
 
 }

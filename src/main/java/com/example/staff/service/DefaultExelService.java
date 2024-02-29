@@ -10,12 +10,14 @@ import com.example.staff.entity.DeviceEntity;
 import com.example.staff.entity.EmployeeEntity;
 import com.example.staff.entity.SertificateEntity;
 import com.example.staff.entity.ToolEntity;
+import com.example.staff.entity.WardrobeEntity;
 import com.example.staff.helper.ExelHelper;
 import com.example.staff.repository.CarRepository;
 import com.example.staff.repository.DeviceRepository;
 import com.example.staff.repository.EmployeeRepository;
 import com.example.staff.repository.SertificateRepository;
 import com.example.staff.repository.ToolRepository;
+import com.example.staff.repository.WardrobeRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +30,7 @@ public class DefaultExelService implements ExelService {
 	private final SertificateRepository sertificateRepository;
 	private final DeviceRepository deviceRepository;
 	private final ToolRepository toolRepository;
+	private final WardrobeRepository wardrobeRepository;
 
 	@Override
 	public ByteArrayInputStream employeesLoad() {
@@ -70,6 +73,15 @@ public class DefaultExelService implements ExelService {
 		
 		List<ToolEntity> tools = toolRepository.findAll();
 		ByteArrayInputStream in = ExelHelper.toolsToExcel(tools);
+		
+		return in;
+	}
+
+	@Override
+	public ByteArrayInputStream wardrobesLoad() {
+		
+		List<WardrobeEntity> wardrobes = wardrobeRepository.findAll();
+		ByteArrayInputStream in = ExelHelper.wardrobesToExcel(wardrobes);
 		
 		return in;
 	}
