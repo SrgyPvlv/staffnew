@@ -78,7 +78,7 @@ private final WardrobeEntityService wardrobeEntityService;
 	}
 	
 	@PatchMapping("/wardrobes/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	//@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<WardrobeEntity> updateWardrobeEntity(@PathVariable Long id,@RequestBody WardrobeEntity wardrobe) {
 		try {
 			return new ResponseEntity<>(wardrobeEntityService.editWardrobeEntity(id, wardrobe),HttpStatus.OK);

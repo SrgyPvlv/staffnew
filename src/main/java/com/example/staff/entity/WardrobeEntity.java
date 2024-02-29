@@ -31,4 +31,6 @@ public class WardrobeEntity {
 	
 	private boolean free;
 	
+	private String comment;
+	
 }

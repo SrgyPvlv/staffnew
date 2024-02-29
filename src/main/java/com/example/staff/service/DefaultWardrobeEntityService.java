@@ -46,6 +46,7 @@ public class DefaultWardrobeEntityService implements WardrobeEntityService {
 		editedWardrobe.setEmployee(wardrobeEntity.getEmployee());
 		editedWardrobe.setRoom(wardrobeEntity.getRoom());
 		editedWardrobe.setFree(wardrobeEntity.isFree());
+		editedWardrobe.setComment(wardrobeEntity.getComment());
 		
 		return wardrobeRepository.saveAndFlush(editedWardrobe);
 	}

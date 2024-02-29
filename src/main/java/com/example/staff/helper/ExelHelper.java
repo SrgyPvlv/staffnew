@@ -16,6 +16,7 @@ import com.example.staff.entity.DeviceEntity;
 import com.example.staff.entity.EmployeeEntity;
 import com.example.staff.entity.SertificateEntity;
 import com.example.staff.entity.ToolEntity;
+import com.example.staff.entity.WardrobeEntity;
 
 public class ExelHelper {
 	public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -30,11 +31,14 @@ public class ExelHelper {
 			"Комментарий", "Номер бухучета", "Место хранения", "Подлежит поверке", "Находится в поверке", "Дата сдачи/возврата в/из поверку/и"};
 	static String[] TOOLHEADERs = {"Тип инструмента", "Наименование инструмента", "Номер инструмента", "Владелец инструмента", "Фактическое подразделение",
 			"Комментарий", "Номер бухучета", "Место хранения", "Временно передан", "Дата передачи/возврата", "Кому передан"};
+	static String[] WARDROBEHEADERs = {"Номер шкафчика", "Помещение", "Использование", "Комментарий по шкафчику", "Сотрудник",
+			"Должность", "Мобильный тел.", "Фактическое подразделение", "Штатное подразделение"};
 	static String SHEET = "Сотрудники ОЭРП";
 	static String CARSHEET = "Автомобили ОЭРП";
 	static String SERTIFICATESHEET = "Удостоверения ОЭРП";
 	static String DEVICESSHEET = "Приборы ОЭРП";
 	static String TOOLSSHEET = "Инструменты ОЭРП";
+	static String WARDROBESSHEET = "Шкафчики ОЭРП";
 	
 	public static ByteArrayInputStream employeesToExcel(List<EmployeeEntity> employees) {
 
@@ -246,6 +250,52 @@ public class ExelHelper {
 	        try {if(tool.isInMoving()) {row.createCell(8).setCellValue("да");}else{row.createCell(8).setCellValue("нет");}} catch(Exception ex) {row.createCell(8).setCellValue("");};
 	        try {row.createCell(9).setCellValue(tool.getDateMoving());} catch(Exception ex) {row.createCell(9).setCellValue("");};
 	        try {row.createCell(10).setCellValue(tool.getCommentMoving());} catch(Exception ex) {row.createCell(10).setCellValue("");};
+	      }
+
+	      workbook.write(out);
+	      return new ByteArrayInputStream(out.toByteArray());
+	    } catch (IOException e) {
+	      throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
+	    }
+	  }
+	
+	public static ByteArrayInputStream wardrobesToExcel(List<WardrobeEntity> wardrobes) {
+
+	    try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
+	      Sheet sheet = workbook.createSheet(WARDROBESSHEET);
+
+	      // Header
+	      Row headerRow = sheet.createRow(0);
+
+	      for (int col = 0; col < WARDROBEHEADERs.length; col++) {
+	        Cell cell = headerRow.createCell(col);
+	        cell.setCellValue(WARDROBEHEADERs[col]);
+	      }
+
+	      int rowIdx = 1;
+	      for (WardrobeEntity wardrobe : wardrobes) {
+	        Row row = sheet.createRow(rowIdx++);
+
+	        try {row.createCell(0).setCellValue(wardrobe.getNumber());} catch(Exception ex) {row.createCell(0).setCellValue("");};
+	        try {row.createCell(1).setCellValue(wardrobe.getRoom());} catch(Exception ex) {row.createCell(1).setCellValue("");};
+	        try {if(wardrobe.isFree()) {row.createCell(2).setCellValue("свободен");}else{row.createCell(2).setCellValue("занят");}} catch(Exception ex) {row.createCell(2).setCellValue("");};	        
+	        try {row.createCell(3).setCellValue(wardrobe.getComment());} catch(Exception ex) {row.createCell(3).setCellValue("");};
+	        try {row.createCell(4).setCellValue(wardrobe.getEmployee().getName());} catch(Exception ex) {row.createCell(4).setCellValue("");};
+	        try {row.createCell(5).setCellValue(wardrobe.getEmployee().getPosition().getPosition().split("\\.")[0]);} catch(Exception ex) {row.createCell(5).setCellValue("");};
+	        try {row.createCell(6).setCellValue(wardrobe.getEmployee().getMobilePhone());} catch(Exception ex) {row.createCell(6).setCellValue("");};
+	        
+	        try {row.createCell(7).setCellValue(wardrobe.getEmployee().getFactDepartment().getFunctionGroup().getFunctionGroup());} 
+	        catch(Exception ex) {try {row.createCell(7).setCellValue(wardrobe.getEmployee().getFactDepartment().getGroupe().getGroupe());}
+	           catch(Exception ex2) {try {row.createCell(7).setCellValue(wardrobe.getEmployee().getFactDepartment().getDivision().getDivision());}
+	           catch(Exception ex3) {row.createCell(7).setCellValue("");}}
+	           };
+	           
+	           try {row.createCell(8).setCellValue(wardrobe.getEmployee().getStaffDepartment().getFunctionGroup().getFunctionGroup());} 
+		        catch(Exception ex) {try {row.createCell(8).setCellValue(wardrobe.getEmployee().getStaffDepartment().getGroupe().getGroupe());}
+		           catch(Exception ex2) {try {row.createCell(8).setCellValue(wardrobe.getEmployee().getStaffDepartment().getDivision().getDivision());}
+		           catch(Exception ex3) {row.createCell(8).setCellValue("");}}
+		           };
+	  	      
 	      }
 
 	      workbook.write(out);
