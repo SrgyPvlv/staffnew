@@ -38,7 +38,7 @@ private final WardrobeEntityService wardrobeEntityService;
 	}
 	
 	@GetMapping("/wardrobes")
-	public ResponseEntity<List<WardrobeEntity>> findByNumberEmployeeRoomFree(@RequestParam(required=false) String filter){
+	public ResponseEntity<List<WardrobeEntity>> findByNumberEmployeeRoom(@RequestParam(required=false) String filter){
 		
 		if(filter!=null && filter.trim().length()!=0) {
 			String filter1=filter;
@@ -78,7 +78,7 @@ private final WardrobeEntityService wardrobeEntityService;
 	}
 	
 	@PatchMapping("/wardrobes/{id}")
-	//@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<WardrobeEntity> updateWardrobeEntity(@PathVariable Long id,@RequestBody WardrobeEntity wardrobe) {
 		try {
 			return new ResponseEntity<>(wardrobeEntityService.editWardrobeEntity(id, wardrobe),HttpStatus.OK);
