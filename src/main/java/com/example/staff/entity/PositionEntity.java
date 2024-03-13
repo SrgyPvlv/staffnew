@@ -1,17 +1,16 @@
 package com.example.staff.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,19 +28,8 @@ public class PositionEntity {
 	
 	private String position;
 	
-	
-	@OneToMany(mappedBy="position",fetch=FetchType.LAZY,orphanRemoval=false)
-	@JsonIgnore
-	private List<EmployeeEntity> employees=new ArrayList<>();
-	
-	public void addEmployeeEntity(EmployeeEntity employeeEntity) {
-		employees.add(employeeEntity);
-		employeeEntity.setPosition(this);
-	}
-	
-	public void removeEmployeeEntity(EmployeeEntity employeeEntity) {
-		employees.remove(employeeEntity);
-		employeeEntity.setPosition(null);
-	}
+	@OneToOne(mappedBy="position",fetch=FetchType.EAGER,orphanRemoval=false)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	private EmployeeEntity employee;
 	
 }

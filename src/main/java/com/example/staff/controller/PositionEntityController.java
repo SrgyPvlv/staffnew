@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -53,6 +54,14 @@ public class PositionEntityController {
 	@PutMapping("/positions/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<PositionEntity> editPositionEntity(@PathVariable Long id,@RequestBody PositionEntity positionEntity){
+		try {
+			return new ResponseEntity<>(positionEntityService.editPositionEntity(id, positionEntity),HttpStatus.OK);
+		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
+	}
+	
+	@PatchMapping("/positions/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+	public ResponseEntity<PositionEntity> updatePositionEntity(@PathVariable Long id,@RequestBody PositionEntity positionEntity){
 		try {
 			return new ResponseEntity<>(positionEntityService.editPositionEntity(id, positionEntity),HttpStatus.OK);
 		}catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
