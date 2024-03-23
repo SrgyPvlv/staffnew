@@ -22,7 +22,7 @@ public class WardrobeEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private String number;
+	private int number;
 	
 	@OneToOne
 	private EmployeeEntity employee;

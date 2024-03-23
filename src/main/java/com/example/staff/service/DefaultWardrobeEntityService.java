@@ -58,9 +58,9 @@ public class DefaultWardrobeEntityService implements WardrobeEntityService {
 	}
 
 	@Override
-	public List<WardrobeEntity> findByNumberEmployeeRoom(String filter1, String filter2, String filter3) {
+	public List<WardrobeEntity> findByNumberEmployeeRoom(int filter1, String filter2, String filter3) {
 		
-		return wardrobeRepository.findByNumberIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrRoomIgnoreCaseContainingOrderByNumberAsc(filter1, filter2, filter3);
+		return wardrobeRepository.findByNumberEqualsOrEmployeeNameIgnoreCaseContainingOrRoomIgnoreCaseContainingOrderByNumberAsc(filter1, filter2, filter3);
 	}
 
 	@Override

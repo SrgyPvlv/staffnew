@@ -10,6 +10,6 @@ import com.example.staff.entity.WardrobeEntity;
 @Repository
 public interface WardrobeRepository extends JpaRepository<WardrobeEntity, Long> {
 	
-	List<WardrobeEntity> findByNumberIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrRoomIgnoreCaseContainingOrderByNumberAsc(String filter1,String filter2,String filter3);
+	List<WardrobeEntity> findByNumberEqualsOrEmployeeNameIgnoreCaseContainingOrRoomIgnoreCaseContainingOrderByNumberAsc(int filter1,String filter2,String filter3);
 	List<WardrobeEntity> findByEmployeeId(Long id);
 }
