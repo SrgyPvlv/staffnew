@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.staff.entity.RefreshToken;
 import com.example.staff.entity.Roles;
 import com.example.staff.entity.Users;
+import com.example.staff.exception.ItemNotFoundException;
 import com.example.staff.exception.TokenRefreshException;
 import com.example.staff.payload.JwtResponse;
 import com.example.staff.payload.LoginRequest;
@@ -78,7 +79,8 @@ public class AuthController {
 	    String requestRefreshToken = request.getRefreshToken();
 	    
 	    try {
-	    RefreshToken rt=refreshTokenService.findByToken(requestRefreshToken).orElseThrow();
+	    RefreshToken rt=refreshTokenService.findByToken(requestRefreshToken)
+	    		.orElseThrow(() -> new ItemNotFoundException("RefreshToken not found"));
 	    RefreshToken rt1=refreshTokenService.verifyExpiration(rt);
 	    Users user=rt1.getUser();
 	    String token = jwtUtils.generateTokenFromUsername(user.getUsername());

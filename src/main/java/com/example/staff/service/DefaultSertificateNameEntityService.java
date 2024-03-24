@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.example.staff.entity.SertificateNameEntity;
 import com.example.staff.exception.ItemNotFoundException;
@@ -27,7 +28,7 @@ public class DefaultSertificateNameEntityService implements SertificateNameEntit
 	@Override
 	public List<SertificateNameEntity> getAllSertificateNameEntity() {
 		
-		return sertificateNameRepository.findAll();
+		return sertificateNameRepository.findAll(Sort.by(Sort.Direction.ASC,"sertificateName"));
 	}
 
 	@Override

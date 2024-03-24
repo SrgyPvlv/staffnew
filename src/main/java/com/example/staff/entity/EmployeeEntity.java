@@ -54,7 +54,7 @@ public class EmployeeEntity {
 	@JoinColumn(name="cars_id")
 	private CarEntity car;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="positions_id")
 	private PositionEntity position;
 	
@@ -71,6 +71,5 @@ public class EmployeeEntity {
 		sertificates.remove(sertificateEntity);
 		sertificateEntity.setEmployee(null);
 	}
-	
-	
+		
 }

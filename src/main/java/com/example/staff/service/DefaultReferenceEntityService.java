@@ -2,6 +2,7 @@ package com.example.staff.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.staff.entity.ReferenceEntity;
@@ -28,7 +29,7 @@ public class DefaultReferenceEntityService implements ReferenceEntityService {
 	@Override
 	public List<ReferenceEntity> getAllReferences() {
 		
-		return referenceRepository.findAll();
+		return referenceRepository.findAll(Sort.by(Sort.Direction.ASC,"referenceName"));
 	}
 
 	@Override

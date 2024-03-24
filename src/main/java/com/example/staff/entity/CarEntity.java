@@ -35,6 +35,10 @@ public class CarEntity {
 	@JoinColumn(name="carmodels_id")
 	private CarModelEntity carModel;
 	
+	@ManyToOne
+	@JoinColumn(name="carparkings_id")
+	private CarParkingEntity carParking;
+	
 	@OneToOne(mappedBy="car",fetch=FetchType.EAGER,orphanRemoval=false)
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private EmployeeEntity employee;
