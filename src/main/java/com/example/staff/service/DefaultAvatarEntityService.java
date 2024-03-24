@@ -68,19 +68,20 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 	}
 
 	@Override
-	public Optional<String> getContentTypeByEmployeeId(Long id) {
+	public String getContentTypeByEmployeeId(Long id) {
 		
 		Optional<AvatarEntity> avatarOpt = Optional.ofNullable(avatarRepository.findByEmployeeId(id));
-		return avatarOpt.map(AvatarEntity::getContentType);
+		return avatarOpt.map(AvatarEntity::getContentType).orElseThrow(() -> new ItemNotFoundException("ContentType not found: id = " + id));
 	}
 
 	@Override
-	public Optional<byte[]> getAvatarEntityByEmployeeId(Long id) {
+	public byte[] getAvatarEntityByEmployeeId(Long id) {
 		
 		Optional<AvatarEntity> avatarOpt = Optional.ofNullable(avatarRepository.findByEmployeeId(id));
 		return avatarOpt.map(AvatarEntity::getFileName).map(filename ->{
 			try {return Files.readAllBytes(Paths.get(path,filename));} catch (Exception ex) {throw new IllegalStateException(ex);}
-		});
+		})
+				.orElseThrow(() -> new ItemNotFoundException("File not found: id = " + id));
 	}
 
 }

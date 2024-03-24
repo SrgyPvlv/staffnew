@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.staff.exception.ItemNotFoundException;
 import com.example.staff.service.AvatarEntityService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,11 +37,11 @@ public class AvatarController {
 	
 	@GetMapping("/avatars/{id}")
 	public ResponseEntity<byte []> getAvatar(@PathVariable Long id){
-		String contentType = avatarEntityService.getContentTypeByEmployeeId(id)
-				.orElseThrow(() -> new ItemNotFoundException("ContentType not found: id = " + id));
-		byte[] data = avatarEntityService.getAvatarEntityByEmployeeId(id)
-				.orElseThrow(() -> new ItemNotFoundException("File not found: id = " + id));
-		try{return ResponseEntity
+		
+		try{
+			String contentType = avatarEntityService.getContentTypeByEmployeeId(id);
+			byte[] data = avatarEntityService.getAvatarEntityByEmployeeId(id);
+			return ResponseEntity
 				.ok()
 				.contentType(MediaType.parseMediaType(contentType))
 				.body(data);} catch(Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);}
