@@ -41,7 +41,8 @@ private final WardrobeEntityService wardrobeEntityService;
 	public ResponseEntity<List<WardrobeEntity>> findByNumberEmployeeRoom(@RequestParam(required=false) String filter){
 		
 		if(filter!=null && filter.trim().length()!=0) {
-			int filter1=Integer.parseInt(filter);
+			int filter1;
+			if(filter.matches("-?\\d+")) {filter1=Integer.parseInt(filter);} else {filter1=-1;}
 			String filter2=filter;
 			String filter3=filter;
 			try {
