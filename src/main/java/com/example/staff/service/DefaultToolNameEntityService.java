@@ -43,7 +43,8 @@ public class DefaultToolNameEntityService implements ToolNameEntityService {
 				.findById(id)
 				.orElseThrow(() -> new ItemNotFoundException("ToolName not found: id = " + id));
 		editedToolName.setToolName(toolNameEntity.getToolName());
-		return editedToolName;
+		
+		return toolNameRepository.saveAndFlush(editedToolName);
 	}
 
 	@Override
