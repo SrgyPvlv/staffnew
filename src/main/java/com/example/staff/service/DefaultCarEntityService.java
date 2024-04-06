@@ -56,9 +56,9 @@ public class DefaultCarEntityService implements CarEntityService {
 	}
 
 	@Override
-	public List<CarEntity> findByNumberModel(String filter1, String filter2) {
+	public List<CarEntity> findByNumberModelEmployee(String filter1, String filter2, String filter3) {
 		
-		return carRepository.findByCarNumberIgnoreCaseContainingOrCarModelCarModelIgnoreCaseContainingOrderByCarNumber(filter1, filter2);
+		return carRepository.findByCarNumberIgnoreCaseContainingOrCarModelCarModelIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrderByCarNumber(filter1, filter2, filter3);
 	}
 
 	
