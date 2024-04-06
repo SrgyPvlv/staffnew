@@ -40,12 +40,13 @@ public class CarEntityController {
 	}
 		
 	@GetMapping("/cars")
-	public ResponseEntity<List<CarEntity>> findByNumberModel(@RequestParam(required=false) String filter){
+	public ResponseEntity<List<CarEntity>> findByNumberModelEmployee(@RequestParam(required=false) String filter){
 		if(filter!=null && filter.trim().length()!=0) {
 			String filter1=filter;
 			String filter2=filter;
+			String filter3=filter;
 			try {
-				return ResponseEntity.ok(carEntityService.findByNumberModel(filter1,filter2));
+				return ResponseEntity.ok(carEntityService.findByNumberModelEmployee(filter1,filter2,filter3));
 			} catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
 		}else {
 			try {

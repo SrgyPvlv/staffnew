@@ -10,5 +10,5 @@ import com.example.staff.entity.CarEntity;
 @Repository
 public interface CarRepository extends JpaRepository<CarEntity,Long> {
 	
-	List<CarEntity> findByCarNumberIgnoreCaseContainingOrCarModelCarModelIgnoreCaseContainingOrderByCarNumber(String filter1, String filter2);
+	List<CarEntity> findByCarNumberIgnoreCaseContainingOrCarModelCarModelIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrderByCarNumber(String filter1, String filter2, String filter3);
 }
