@@ -62,6 +62,6 @@ public class DefaultSertificateService implements SertificateService {
 	@Override
 	public List<SertificateEntity> findSertificatesByEmployeeId(Long id) {
 		
-		return sertificateRepository.findByEmployeeId(id);
+		return sertificateRepository.findByEmployeeIdOrderBySertificateNameSertificateName(id);
 	}
 }

@@ -10,5 +10,5 @@ import com.example.staff.entity.SertificateEntity;
 @Repository
 public interface SertificateRepository extends JpaRepository<SertificateEntity,Long> {
 
-	List<SertificateEntity> findByEmployeeId(Long id);
+	List<SertificateEntity> findByEmployeeIdOrderBySertificateNameSertificateName(Long id);
 }
