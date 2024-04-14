@@ -10,6 +10,6 @@ import com.example.staff.entity.ToolEntity;
 @Repository
 public interface ToolRepository extends JpaRepository<ToolEntity, Long> {
 
-	List<ToolEntity> findByToolNumberIgnoreCaseContainingOrToolTypeToolTypeNameIgnoreCaseContainingOrToolNameToolNameIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrToolCommentIgnoreCaseContainingOrStorePlaceIgnoreCaseContainingOrderByToolType(String filter1, String filter2, String filter3, String filter4, String filter5, String filter6);
-	List<ToolEntity> findByEmployeeId(Long id);
+	List<ToolEntity> findByToolNumberIgnoreCaseContainingOrToolTypeToolTypeNameIgnoreCaseContainingOrToolNameToolNameIgnoreCaseContainingOrEmployeeNameIgnoreCaseContainingOrToolCommentIgnoreCaseContainingOrStorePlaceIgnoreCaseContainingOrderByToolTypeToolTypeName(String filter1, String filter2, String filter3, String filter4, String filter5, String filter6);
+	List<ToolEntity> findByEmployeeIdOrderByToolTypeToolTypeName(Long id);
 }
