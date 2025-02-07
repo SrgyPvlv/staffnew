@@ -84,4 +84,16 @@ public class DefaultAvatarEntityService implements AvatarEntityService {
 				.orElseThrow(() -> new ItemNotFoundException("File not found: id = " + id));
 	}
 
+	@Override
+	public void deleteAvatarEntityByEmployeeId(Long id) {
+		
+		Optional<AvatarEntity> avatarOpt = Optional.ofNullable(avatarRepository.findByEmployeeId(id));
+		AvatarEntity avatar = avatarOpt.get();
+		String filename = avatar.getFileName();
+		Long avatarId = avatar.getId();
+		Path destPath = Paths.get(path,filename);
+		try {Files.delete(destPath);avatarRepository.deleteById(avatarId);} catch (Exception ex) {throw new RuntimeException(ex);}
+		
+		//avatarRepository.deleteAvatarByEmployeeId(id);
+	}
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.example.staff.entity.EmployeeEntity;
+import com.example.staff.service.AvatarEntityService;
 import com.example.staff.service.EmployeeEntityService;
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeEntityController {
 
 	private final EmployeeEntityService employeeEntityService;
+	private final AvatarEntityService avatarEntityService;
 	
 	@GetMapping("/employees/{id}")
 	public ResponseEntity<EmployeeEntity> getEmployeeEntityById(@PathVariable Long id){
@@ -106,6 +108,7 @@ public class EmployeeEntityController {
 	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPERADMIN')")
 	public ResponseEntity<HttpStatus> deleteEmployEntityById(@PathVariable Long id){
 		try {
+			avatarEntityService.deleteAvatarEntityByEmployeeId(id);
 			employeeEntityService.deleteEmployEntityById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}catch (Exception ex) {return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
